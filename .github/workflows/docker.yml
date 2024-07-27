@@ -38,5 +38,3 @@ jobs:
           push: true
           tags: woodchen/${{ env.IMAGE_NAME }}:latest
           platforms: linux/amd64
-          build-args: |
-      BUILDKIT_PROGRESS=plain
