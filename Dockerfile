@@ -1,18 +1,15 @@
-# 第一阶段：answer-builder
 FROM apache/answer AS answer-builder
 
-# 第二阶段：golang-builder
 FROM golang:1.19-alpine AS golang-builder
 
-# 复制 answer 可执行文件
 COPY --from=answer-builder /usr/bin/answer /usr/bin/answer
 
-# 安装依赖
 RUN apk --no-cache add \
     build-base git bash nodejs npm go && \
     npm install -g pnpm@8.9.2
 
-# 使用 answer 命令构建新的二进制文件
+RUN which answer && answer --version
+
 RUN answer build \
     --with github.com/apache/incubator-answer-plugins/connector-basic \
     --with github.com/apache/incubator-answer-plugins/storage-s3 \
@@ -26,7 +23,6 @@ RUN answer build \
     --with github.com/answerdev/plugins/editor-formula \
     --output /usr/bin/new_answer
 
-# 第三阶段：最终镜像
 FROM alpine
 LABEL maintainer="linkinstar@apache.org"
 
