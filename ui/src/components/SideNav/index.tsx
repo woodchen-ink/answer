@@ -73,6 +73,26 @@ const Index: FC = () => {
             <span>{t('header.nav.user')}</span>
           </NavLink>
 
+          {/* 快捷链接 */}
+          <div className="py-2 px-3 mt-3 small fw-bold">
+            {t('header.nav.quicklinks')}
+          </div>
+          <NavLink to="//tags/announcement" className="nav-link">
+            <span>{t('header.nav.announcement')}</span>
+          </NavLink>
+          <NavLink to="/tags/help" className="nav-link">
+            <span>{t('header.nav.help')}</span>
+          </NavLink>
+          <NavLink to="/tags/information-sharing" className="nav-link">
+            <span>{t('header.nav.information-sharing')}</span>
+          </NavLink>
+          <NavLink to="/tags/resource-sharing" className="nav-link">
+            <span>{t('header.nav.resource-sharing')}</span>
+          </NavLink>
+          <NavLink to="/tags/just-talk" className="nav-link">
+            <span>{t('header.nav.just-talk')}</span>
+          </NavLink>
+
           {can_revision || userInfo?.role_id === 2 ? (
             <>
               <div className="py-2 px-3 mt-3 small fw-bold">
