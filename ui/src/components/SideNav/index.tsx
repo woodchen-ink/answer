@@ -77,7 +77,7 @@ const Index: FC = () => {
           <div className="py-2 px-3 mt-3 small fw-bold">
             {t('header.nav.quicklinks')}
           </div>
-          <NavLink to="//tags/announcement" className="nav-link">
+          <NavLink to="/tags/announcement" className="nav-link">
             <span>{t('header.nav.announcement')}</span>
           </NavLink>
           <NavLink to="/tags/help" className="nav-link">
