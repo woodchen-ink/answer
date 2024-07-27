@@ -884,7 +884,7 @@ ui:
     search:
       placeholder: Szukaj
   footer:
-    build_on: >-
+    build_on: 
       Zbudowane na platformie <1> Apache Answer </1> - oprogramowanie open-source, które napędza społeczności pytań i odpowiedzi.<br />Stworzone z miłością © {{cc}}.
   upload_img:
     name: Zmień

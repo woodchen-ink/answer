@@ -884,7 +884,7 @@ ui:
     search:
       placeholder: جستجو
   footer:
-    build_on: >-
+    build_on: 
       پشتیبانی شده توسط <1> Apache Answer </1> - نرم‌افزار منبع باز که باهمستان های پرسش و پاسخ را تقویت می کند.<br />ساخته شده با عشق © {{cc}}.
   upload_img:
     name: تغییر

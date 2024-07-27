@@ -884,7 +884,7 @@ ui:
     search:
       placeholder: Buscar
   footer:
-    build_on: >-
+    build_on: 
       Sitio creado por <1> Apache Answer </1>- el software libre que impulsa comunidades de Q&A.<br />Hecho con amor © {{cc}}.
   upload_img:
     name: Cambiar

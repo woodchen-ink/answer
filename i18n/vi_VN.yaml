@@ -884,7 +884,7 @@ ui:
     search:
       placeholder: Tìm kiếm
   footer:
-    build_on: >-
+    build_on: 
       Được hỗ trợ bởi <1> Apache Answer </1>- phần mềm mã nguồn mở dành cho cộng đồng hỏi đáp.<br />Được tạo với tình yêu © {{cc}}.
   upload_img:
     name: Thay đổi

@@ -884,7 +884,7 @@ ui:
     search:
       placeholder: Cerca
   footer:
-    build_on: >-
+    build_on: 
       Basato su <1> Apache Answer </1>, il software open source che alimenta le comunità di domande e risposte.<br />Fatto con amore © {{cc}}.
   upload_img:
     name: Modifica

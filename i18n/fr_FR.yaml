@@ -884,7 +884,7 @@ ui:
     search:
       placeholder: Rechercher
   footer:
-    build_on: >-
+    build_on: 
       Propulsé par <1> Apache Answer </1>- le logiciel open-source qui alimente les communautés de Q&A.<br />Fait avec amour ©️ {{cc}}.
   upload_img:
     name: Remplacer

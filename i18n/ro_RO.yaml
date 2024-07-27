@@ -884,7 +884,7 @@ ui:
     search:
       placeholder: Caută
   footer:
-    build_on: >-
+    build_on: 
       Susținut de <1> Apache Răspuns </1>- software-ul open-source care asigură Q&A comunități.<br />Făcut cu dragoste ©️ {{cc}}.
   upload_img:
     name: Schimbare

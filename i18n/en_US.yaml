@@ -901,7 +901,7 @@ ui:
     search:
       placeholder: Search
   footer:
-    build_on: >-
+    build_on: 
       Powered by <1> Apache Answer </1>- the open-source software that powers Q&A
       communities.<br />Made with love © {{cc}}.
   upload_img:

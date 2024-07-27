@@ -884,7 +884,7 @@ ui:
     search:
       placeholder: Sök
   footer:
-    build_on: >-
+    build_on: 
       Powered by <1> Apache Answer </1>- the open-source software that powers Q&A communities.<br />Made with love © {{cc}}.
   upload_img:
     name: Ändra

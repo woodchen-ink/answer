@@ -588,7 +588,7 @@ ui:
     search:
       placeholder: Procurar
   footer:
-    build_on: >-
+    build_on: 
       Made with love © {{cc}}.
   upload_img:
     name: Mudar
