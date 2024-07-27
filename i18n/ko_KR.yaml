@@ -885,7 +885,7 @@ ui:
       placeholder: 검색
   footer:
     build_on: 
-      Powered by <1> Apache Answer </1> - Q&A 커뮤니티를 지원하는 오픈 소스 소프트웨어입니다.<br />Made with love © {{cc}}.
+      Made with love © {{cc}}.
   upload_img:
     name: 변경
     loading: 로딩 중...

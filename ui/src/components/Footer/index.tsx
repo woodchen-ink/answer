@@ -34,7 +34,7 @@ const Index = () => {
       <Container className="py-3">
         <p className="text-center mb-0 small text-secondary">
           <Trans i18nKey="footer.build_on" values={{ cc }}>
-            Made with love. © 2024
+            Made with love. © 2022
           </Trans>
         </p>
       </Container>
