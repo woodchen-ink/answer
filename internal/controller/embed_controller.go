@@ -53,11 +53,23 @@ func (c *EmbedController) GetEmbedConfig(ctx *gin.Context) {
 	_ = plugin.CallConfig(func(fn plugin.Config) error {
 		if fn.Info().SlugName == slugName {
 			for _, field := range fn.ConfigFields() {
+				var enable bool
+				switch v := field.Value.(type) {
+				case bool:
+					enable = v
+				case string:
+					enable = v == "true" || v == "1" || v == "on"
+				default:
+					// 处理其他可能的类型或记录错误
+					continue
+				}
+
 				resp = append(resp, &schema.GetEmbedOptionResp{
 					Platform: field.Name,
-					Enable:   field.Value.(bool),
+					Enable:   enable,
 				})
 			}
+
 			return nil
 		}
 		return nil
