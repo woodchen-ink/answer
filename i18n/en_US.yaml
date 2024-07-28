@@ -898,6 +898,12 @@ ui:
       review: Review
       bookmark: Bookmarks
       moderation: Moderation
+      quicklinks: Quick links
+      announcement: Announcement
+      help: Help
+      information-sharing: Information sharing
+      resource-sharing: Resource sharing
+      just-talk: Just talk
     search:
       placeholder: Search
   footer:
