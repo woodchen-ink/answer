@@ -93,6 +93,17 @@ const Index: FC = () => {
             <span>{t('header.nav.just-talk')}</span>
           </NavLink>
 
+          {/* 专区 */}
+          <div className="py-2 px-3 mt-3 small fw-bold">
+            {t('header.nav.prefecture')}
+          </div>
+          <NavLink to="/tags/it996007" className="nav-link">
+            <span>{t('header.nav.it')}</span>
+          </NavLink>
+          <NavLink to="/tags/intl-trade-logistics" className="nav-link">
+            <span>{t('header.nav.intl-trade-logistics')}</span>
+          </NavLink>
+
           {can_revision || userInfo?.role_id === 2 ? (
             <>
               <div className="py-2 px-3 mt-3 small fw-bold">
