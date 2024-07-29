@@ -78,5 +78,6 @@ jobs:
           script: |
             docker pull $DOCKER_IMAGE:${{ github.sha }}
             cd $PROJECT_PATH
+            rm -rf ./i18n
             docker compose down
             docker compose up -d
