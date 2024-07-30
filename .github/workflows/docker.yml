@@ -8,7 +8,6 @@ on:
       - v*
 
 env:
-  IMAGE_NAME: answer
   DOCKER_HUB_USERNAME: woodchen
   DOCKER_HUB_REPO: answer
 
@@ -41,7 +40,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: woodchen/${{ env.IMAGE_NAME }}:latest
+          tags: woodchen/${{ env.DOCKER_HUB_REPO }}:latest
           platforms: linux/amd64,linux/arm64
 
   deploy:
@@ -53,7 +52,7 @@ jobs:
       - name: Deploy to server
         uses: appleboy/ssh-action@master
         env:
-          DOCKER_IMAGE: ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}
+          DOCKER_IMAGE: ${{ env.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_HUB_REPO }}
           PROJECT_PATH: ${{ secrets.PROJECT_PATH }}
         with:
           host: ${{ secrets.SERVER_IP }}
@@ -61,7 +60,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           envs: DOCKER_IMAGE,PROJECT_PATH
           script: |
-            docker pull $DOCKER_IMAGE:${{ github.sha }}
+            docker pull $DOCKER_IMAGE:latest
             cd $PROJECT_PATH
             rm -rf ./i18n
             docker compose down
