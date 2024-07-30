@@ -83,18 +83,6 @@ jobs:
           name: generated-files
           path: .
 
-      - name: Check download status
-        run: |
-          if [ ! -f "cmd/wire_gen.go" ]; then
-            echo "Generated files were not downloaded successfully. Attempting to regenerate..."
-            go install github.com/google/wire/cmd/wire@latest
-            go install github.com/golang/mock/mockgen@v1.6.0
-            wire ./cmd
-            go generate ./...
-          else
-            echo "Generated files were downloaded successfully."
-          fi
-
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
@@ -128,6 +116,37 @@ jobs:
           cp answer artifact/usr/bin/
           cp -r i18n/*.yaml artifact/data/i18n/
           tar -czvf artifact-${{ matrix.platform }}.tar.gz -C artifact .
+
+      - name: Create Dockerfile
+        run: |
+          cat << EOF > Dockerfile
+          FROM alpine
+          ARG TIMEZONE=Asia/Shanghai
+          RUN apk update && \
+              apk --no-cache add bash ca-certificates curl dumb-init gettext openssh sqlite gnupg tzdata && \
+              ln -sf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
+              echo "${TIMEZONE}" > /etc/timezone
+          COPY artifact-${{ matrix.platform }}.tar.gz /
+          COPY script/entrypoint.sh /entrypoint.sh
+          RUN tar -xzvf /artifact-${{ matrix.platform }}.tar.gz -C / && \
+              rm /artifact-${{ matrix.platform }}.tar.gz && \
+              chmod 755 /entrypoint.sh
+          VOLUME /data
+          EXPOSE 80
+          ENTRYPOINT ["/entrypoint.sh"]
+          EOF
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/${{ matrix.platform }}
+          push: false
+          tags: ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ matrix.platform }}-latest
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
