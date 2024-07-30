@@ -73,12 +73,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v4
         with:
           go-version: '1.19'
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: '20'
 
@@ -118,15 +118,14 @@ jobs:
       - name: Build and push Docker image
         env:
           DOCKER_HUB_USERNAME: ${{ env.DOCKER_HUB_USERNAME }}
-          IMAGE_NAME: answer
+          IMAGE_NAME: ${{env.IMAGE_NAME}}
         run: |
-          cat << EOF > Dockerfile
-          FROM alpine
-          ARG TIMEZONE=Asia/Shanghai
+          echo "FROM alpine
+          ARG TIMEZONE=Asia/Singapore
           RUN apk update && \
               apk --no-cache add bash ca-certificates curl dumb-init gettext openssh sqlite gnupg tzdata && \
               ln -sf /usr/share/zoneinfo/\${TIMEZONE} /etc/localtime && \
-              echo "\${TIMEZONE}" > /etc/timezone
+              echo \"\${TIMEZONE}\" > /etc/timezone
           COPY artifact-${{ matrix.platform }}.tar.gz /
           COPY script/entrypoint.sh /entrypoint.sh
           RUN tar -xzvf /artifact-${{ matrix.platform }}.tar.gz -C / && \
@@ -134,9 +133,10 @@ jobs:
               chmod 755 /entrypoint.sh
           VOLUME /data
           EXPOSE 80
-          ENTRYPOINT ["/entrypoint.sh"]
-          EOF
-          
+          ENTRYPOINT [\"/entrypoint.sh\"]" > Dockerfile
+
+          cat Dockerfile
+
           docker buildx build --platform linux/${{ matrix.platform }} \
             -t ${DOCKER_HUB_USERNAME}/${IMAGE_NAME}:${{ matrix.platform }}-latest \
             -f Dockerfile \
