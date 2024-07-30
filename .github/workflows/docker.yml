@@ -72,24 +72,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Clean workspace
-        run: |
-          git clean -fdx
-          rm -rf .git
-
-      - name: Download generated files
-        uses: actions/download-artifact@v3
-        with:
-          name: generated-files
-          path: .
-
       - name: Set up Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: '1.19'
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
@@ -117,15 +106,27 @@ jobs:
           cp -r i18n/*.yaml artifact/data/i18n/
           tar -czvf artifact-${{ matrix.platform }}.tar.gz -C artifact .
 
-      - name: Create Dockerfile
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ env.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Build and push Docker image
+        env:
+          DOCKER_HUB_USERNAME: ${{ env.DOCKER_HUB_USERNAME }}
+          IMAGE_NAME: answer
         run: |
           cat << EOF > Dockerfile
           FROM alpine
           ARG TIMEZONE=Asia/Shanghai
           RUN apk update && \
               apk --no-cache add bash ca-certificates curl dumb-init gettext openssh sqlite gnupg tzdata && \
-              ln -sf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
-              echo "${TIMEZONE}" > /etc/timezone
+              ln -sf /usr/share/zoneinfo/\${TIMEZONE} /etc/localtime && \
+              echo "\${TIMEZONE}" > /etc/timezone
           COPY artifact-${{ matrix.platform }}.tar.gz /
           COPY script/entrypoint.sh /entrypoint.sh
           RUN tar -xzvf /artifact-${{ matrix.platform }}.tar.gz -C / && \
@@ -135,18 +136,11 @@ jobs:
           EXPOSE 80
           ENTRYPOINT ["/entrypoint.sh"]
           EOF
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/${{ matrix.platform }}
-          push: false
-          tags: ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ matrix.platform }}-latest
+          
+          docker buildx build --platform linux/${{ matrix.platform }} \
+            -t ${DOCKER_HUB_USERNAME}/${IMAGE_NAME}:${{ matrix.platform }}-latest \
+            -f Dockerfile \
+            --push .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
