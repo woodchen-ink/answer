@@ -177,7 +177,7 @@ jobs:
             --push \
             - <<EOF
           FROM scratch
-          COPY --from=${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:amd64-latest / /
+          COPY --from=${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:\${TARGETARCH}-latest / /
           EOF
 
       - name: Verify multi-arch image
