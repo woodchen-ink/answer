@@ -31,31 +31,24 @@ jobs:
 
       - name: Install wire and mockgen
         run: |
-          for i in {1..3}; do
-            go install github.com/google/wire/cmd/wire@latest && break || sleep 5;
-          done
-          for i in {1..3}; do
-            go install github.com/golang/mock/mockgen@v1.6.0 && break || sleep 5;
-          done
+          go install github.com/google/wire/cmd/wire@latest
+          go install github.com/golang/mock/mockgen@v1.6.0
           echo "$HOME/go/bin" >> $GITHUB_PATH
 
       - name: Update go.mod and go.sum
         run: |
-          for i in {1..3}; do
-            go get github.com/google/subcommands@latest && break || sleep 5;
-          done
-          for i in {1..3}; do
-            go get github.com/google/wire/cmd/wire@latest && break || sleep 5;
-          done
+          go get github.com/google/subcommands@latest
+          go get github.com/google/wire/cmd/wire@latest
           go mod download
           go mod tidy
 
-      - name: Generate files
+      - name: Generate wire files
         run: |
-          which wire
-          which mockgen
-          wire ./...
-          go generate ./...
+          find . -name "wire.go" -not -path "./internal/repo/repo_test/*" -exec dirname {} \; | xargs -I {} wire {}
+          find . -name "*_gen.go" -not -path "./internal/repo/repo_test/*"
+
+      - name: Generate mock files
+        run: go generate ./...
 
       - name: Upload generated files
         uses: actions/upload-artifact@v3
