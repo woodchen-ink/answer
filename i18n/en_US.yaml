@@ -909,6 +909,7 @@ ui:
       virtual-currency: Virtual currency
       server: Server
       game: Game
+      music: Music
       banks-money: Banks & Money
       intl-trade-logistics: Trade & Logistics
     search:
