@@ -154,12 +154,41 @@ jobs:
           username: ${{ env.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.ACCESS_TOKEN }}
 
-      - name: Create and push multi-arch manifest
+      - name: Check and create multi-arch manifest
         run: |
+          # 函数用于检查镜像是否存在
+          image_exists() {
+            docker manifest inspect $1 > /dev/null 2>&1
+          }
+
+          # 检查每个架构的镜像
+          for platform in amd64 arm64; do
+            if ! image_exists ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:${platform}-latest; then
+              echo "Error: Image ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:${platform}-latest not found"
+              exit 1
+            fi
+          done
+
+          # 尝试删除现有的manifest列表（如果存在）
+          docker manifest rm ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest || true
+
+          # 创建新的manifest列表
           docker manifest create ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest \
             ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:amd64-latest \
             ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:arm64-latest
+
+          # 为每个架构添加注释
+          docker manifest annotate ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest \
+            ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:amd64-latest --arch amd64
+          docker manifest annotate ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest \
+            ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:arm64-latest --arch arm64
+
+          # 推送manifest列表
           docker manifest push ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+
+      - name: Verify manifest
+        run: |
+          docker manifest inspect ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
 
   deploy:
     needs: push
