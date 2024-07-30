@@ -28,6 +28,9 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Prepare output directory
+        run: mkdir -p /tmp/docker-images
+
       - name: Build for ${{ matrix.platform }}
         uses: docker/build-push-action@v6
         with:
@@ -39,13 +42,13 @@ jobs:
           tags: ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ matrix.platform }}-latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          outputs: type=docker,dest=/tmp/${{ matrix.platform }}.tar
+          outputs: type=docker,dest=/tmp/docker-images/${{ matrix.platform }}.tar
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.platform }}
-          path: /tmp/${{ matrix.platform }}.tar
+          path: /tmp/docker-images/${{ matrix.platform }}.tar
 
   push:
     needs: build
@@ -57,12 +60,12 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
-          path: /tmp
+          path: /tmp/docker-images
 
       - name: Load images
         run: |
-          docker load --input /tmp/linux-amd64/linux-amd64.tar
-          docker load --input /tmp/linux-arm64/linux-arm64.tar
+          docker load --input /tmp/docker-images/linux-amd64/linux-amd64.tar
+          docker load --input /tmp/docker-images/linux-arm64/linux-arm64.tar
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
