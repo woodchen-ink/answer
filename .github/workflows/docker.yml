@@ -38,9 +38,19 @@ jobs:
           sudo apt-get install -y build-essential git bash
           npm install -g pnpm@8.9.2
 
-      - name: Install Go tools
+      - name: Update go.mod and go.sum
         run: |
+          go mod download
+          go mod tidy
+
+      - name: Install and update wire
+        run: |
+          go get github.com/google/wire/cmd/wire@v0.5.0
           go install github.com/google/wire/cmd/wire@v0.5.0
+
+      - name: Install mockgen
+        run: |
+          go get github.com/golang/mock/mockgen@v1.6.0
           go install github.com/golang/mock/mockgen@v1.6.0
 
       - name: Generate files
@@ -53,7 +63,6 @@ jobs:
           CGO_ENABLED: 0
           TAGS: "bindata timetzdata sqlite sqlite_unlock_notify"
         run: |
-          go mod download
           go mod tidy
           make build
 
