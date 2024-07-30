@@ -119,6 +119,10 @@ const Index: FC = () => {
             <Icon name="controller" className="me-2" />
             <span>{t('header.nav.game')}</span>
           </NavLink>
+          <NavLink to="/tags/banks-money" className="nav-link">
+            <Icon name="bank" className="me-2" />
+            <span>{t('header.nav.banks-money')}</span>
+          </NavLink>
           <NavLink to="/tags/intl-trade-logistics" className="nav-link">
             <Icon name="buildings" className="me-2" />
             <span>{t('header.nav.intl-trade-logistics')}</span>
