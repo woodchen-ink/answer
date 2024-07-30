@@ -73,23 +73,29 @@ const Index: FC = () => {
             <span>{t('header.nav.user')}</span>
           </NavLink>
 
+          <NavLink to="/tags/announcement" className="nav-link">
+            <Icon name="megaphone-fill" className="me-2" />
+            <span>{t('header.nav.announcement')}</span>
+          </NavLink>
+
           {/* 快捷链接 */}
           <div className="py-2 px-3 mt-3 small fw-bold">
             {t('header.nav.quicklinks')}
           </div>
-          <NavLink to="/tags/announcement" className="nav-link">
-            <span>{t('header.nav.announcement')}</span>
-          </NavLink>
           <NavLink to="/tags/help" className="nav-link">
+            <Icon name="life-preserver" className="me-2" />
             <span>{t('header.nav.help')}</span>
           </NavLink>
           <NavLink to="/tags/information-sharing" className="nav-link">
+            <Icon name="share-fill" className="me-2" />
             <span>{t('header.nav.information-sharing')}</span>
           </NavLink>
           <NavLink to="/tags/resource-sharing" className="nav-link">
+            <Icon name="folder-symlink-fill" className="me-2" />
             <span>{t('header.nav.resource-sharing')}</span>
           </NavLink>
           <NavLink to="/tags/just-talk" className="nav-link">
+            <Icon name="chat-heart-fill" className="me-2" />
             <span>{t('header.nav.just-talk')}</span>
           </NavLink>
 
@@ -98,9 +104,23 @@ const Index: FC = () => {
             {t('header.nav.prefecture')}
           </div>
           <NavLink to="/tags/it996007" className="nav-link">
+            <Icon name="code-slash" className="me-2" />
             <span>{t('header.nav.it')}</span>
           </NavLink>
+          <NavLink to="/tags/virtual-currency" className="nav-link">
+            <Icon name="coin" className="me-2" />
+            <span>{t('header.nav.virtual-currency')}</span>
+          </NavLink>
+          <NavLink to="/tags/server" className="nav-link">
+            <Icon name="hdd-stack" className="me-2" />
+            <span>{t('header.nav.server')}</span>
+          </NavLink>
+          <NavLink to="/tags/game" className="nav-link">
+            <Icon name="controller" className="me-2" />
+            <span>{t('header.nav.game')}</span>
+          </NavLink>
           <NavLink to="/tags/intl-trade-logistics" className="nav-link">
+            <Icon name="buildings" className="me-2" />
             <span>{t('header.nav.intl-trade-logistics')}</span>
           </NavLink>
 

@@ -872,7 +872,7 @@ ui:
   header:
     nav:
       question: 帖子
-      tag: 标签
+      tag: 主题
       user: 用户
       quicklinks: 快捷链接
       announcement: 公告
@@ -882,6 +882,9 @@ ui:
       just-talk: 随便聊聊
       prefecture: 专区
       it: IT
+      virtual-currency: 虚拟币
+      server: 服务器
+      game: 游戏
       intl-trade-logistics: 国际贸易与物流
       profile: 用户主页
       setting: 账号设置

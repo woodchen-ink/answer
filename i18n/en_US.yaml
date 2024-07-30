@@ -906,6 +906,9 @@ ui:
       just-talk: Just talk
       prefecture: Prefecture
       it: IT
+      virtual-currency: Virtual currency
+      server: Server
+      game: Game
       intl-trade-logistics: Trade & Logistics
     search:
       placeholder: Search
