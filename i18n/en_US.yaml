@@ -888,7 +888,7 @@ ui:
     tag_required_text: Required tag (at least one)
   header:
     nav:
-      question: Questions
+      question: Posts
       tag: Tags
       user: Users
       profile: Profile
@@ -898,6 +898,19 @@ ui:
       review: Review
       bookmark: Bookmarks
       moderation: Moderation
+      quicklinks: Quick links
+      announcement: Announcement
+      help: Help
+      information-sharing: Infor sharing
+      resource-sharing: Resource sharing
+      just-talk: Just talk
+      prefecture: Prefecture
+      it: IT
+      virtual-currency: Virtual currency
+      server: Server
+      game: Game
+      banks-money: Banks & Money
+      intl-trade-logistics: Trade & Logistics
     search:
       placeholder: Search
   footer:
