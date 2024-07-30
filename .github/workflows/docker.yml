@@ -72,11 +72,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Clean workspace
+        run: |
+          git clean -fdx
+          rm -rf .git
+
       - name: Download generated files
         uses: actions/download-artifact@v3
         with:
           name: generated-files
           path: .
+
+      - name: Check download status
+        run: |
+          if [ ! -f "cmd/wire_gen.go" ]; then
+            echo "Generated files were not downloaded successfully. Attempting to regenerate..."
+            go install github.com/google/wire/cmd/wire@latest
+            go install github.com/golang/mock/mockgen@v1.6.0
+            wire ./cmd
+            go generate ./...
+          else
+            echo "Generated files were downloaded successfully."
+          fi
 
       - name: Set up Go
         uses: actions/setup-go@v4
@@ -100,7 +117,10 @@ jobs:
           GOARCH: ${{ matrix.platform }}
           CGO_ENABLED: 0
           TAGS: "bindata timetzdata sqlite sqlite_unlock_notify"
-        run: make build
+        run: |
+          go mod download
+          go mod tidy
+          make build
 
       - name: Prepare artifact
         run: |
@@ -114,6 +134,7 @@ jobs:
         with:
           name: artifact-${{ matrix.platform }}
           path: artifact-${{ matrix.platform }}.tar.gz
+
 
 
   push:
