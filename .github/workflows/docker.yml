@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Docker
 
 on:
   push:
@@ -13,98 +13,18 @@ env:
   DOCKER_HUB_REPO: answer
 
 jobs:
-  generate:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: "1.19"
-
-      - name: Set GOPROXY environment variable
-        run: |
-          echo "GOPROXY=https://goproxy.io,direct" >> $GITHUB_ENV
-          echo "GO111MODULE=on" >> $GITHUB_ENV
-
-      - name: Install wire and mockgen
-        run: |
-          go install github.com/google/wire/cmd/wire@latest
-          go install github.com/golang/mock/mockgen@v1.6.0
-          echo "$HOME/go/bin" >> $GITHUB_PATH
-
-      - name: Update go.mod and go.sum
-        run: |
-          go mod download
-          go mod tidy
-
-      - name: Generate wire files
-        run: |
-          wire ./cmd
-          # Add other directories that need wire here, for example:
-          # wire ./internal/service
-          # wire ./internal/controller
-          # etc.
-
-      - name: Generate mock files
-        run: go generate ./...
-
-      - name: List generated files
-        run: |
-          find . -name "*_gen.go"
-          find . -name "mock_*.go"
-
-      - name: Upload generated files
-        uses: actions/upload-artifact@v3
-        with:
-          name: generated-files
-          path: .
-
   build:
-    needs: generate
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: [amd64, arm64]
+        platform: [linux/amd64, linux/arm64]
+
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: '1.19'
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential git bash nodejs npm
-          npm install -g pnpm@8.9.2
-
-      - name: Build for ${{ matrix.platform }}
-        env:
-          GOOS: linux
-          GOARCH: ${{ matrix.platform }}
-          CGO_ENABLED: 0
-          TAGS: "bindata timetzdata sqlite sqlite_unlock_notify"
-        run: |
-          go mod download
-          go mod tidy
-          make build
-
-      - name: Prepare artifact
-        run: |
-          mkdir -p artifact/usr/bin artifact/data/uploads artifact/data/i18n
-          cp answer artifact/usr/bin/
-          cp -r i18n/*.yaml artifact/data/i18n/
-          tar -czvf artifact-${{ matrix.platform }}.tar.gz -C artifact .
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -115,69 +35,20 @@ jobs:
           username: ${{ env.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.ACCESS_TOKEN }}
 
-      - name: Build and push Docker image
-        env:
-          DOCKER_HUB_USERNAME: ${{ env.DOCKER_HUB_USERNAME }}
-          IMAGE_NAME: ${{env.IMAGE_NAME}}
-        run: |
-          echo "FROM alpine
-          ARG TIMEZONE=Asia/Singapore
-          RUN apk update && \
-              apk --no-cache add bash ca-certificates curl dumb-init gettext openssh sqlite gnupg tzdata && \
-              ln -sf /usr/share/zoneinfo/\${TIMEZONE} /etc/localtime && \
-              echo \"\${TIMEZONE}\" > /etc/timezone
-          COPY artifact-${{ matrix.platform }}.tar.gz /
-          COPY script/entrypoint.sh /entrypoint.sh
-          RUN tar -xzvf /artifact-${{ matrix.platform }}.tar.gz -C / && \
-              rm /artifact-${{ matrix.platform }}.tar.gz && \
-              chmod 755 /entrypoint.sh
-          VOLUME /data
-          EXPOSE 80
-          ENTRYPOINT [\"/entrypoint.sh\"]" > Dockerfile
-
-          cat Dockerfile
-
-          docker buildx build --platform linux/${{ matrix.platform }} \
-            -t ${DOCKER_HUB_USERNAME}/${IMAGE_NAME}:${{ matrix.platform }}-latest \
-            -f Dockerfile \
-            --push .
-
-
-
-  push:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
+      - name: Build and push
+        uses: docker/build-push-action@v4
         with:
-          username: ${{ env.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.ACCESS_TOKEN }}
-
-      - name: Create and push multi-arch manifest
-        run: |
-          # 创建多架构 manifest
-          docker manifest create ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest \
-            ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:amd64-latest \
-            ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:arm64-latest
-
-          # 添加架构特定的注释
-          docker manifest annotate ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest \
-            ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:amd64-latest --arch amd64
-          docker manifest annotate ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest \
-            ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:arm64-latest --arch arm64
-
-          # 推送 manifest
-          docker manifest push ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
-
-      - name: Verify multi-arch image
-        run: |
-          docker buildx imagetools inspect ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+          context: .
+          file: Dockerfile
+          push: true
+          tags: woodchen/${{ env.IMAGE_NAME }}:latest
+          platforms: linux/amd64,linux/arm64
 
   deploy:
-    needs: push
+    needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
+
     steps:
       - name: Deploy to server
         uses: appleboy/ssh-action@master
@@ -190,7 +61,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           envs: DOCKER_IMAGE,PROJECT_PATH
           script: |
-            docker pull $DOCKER_IMAGE:latest
+            docker pull $DOCKER_IMAGE:${{ github.sha }}
             cd $PROJECT_PATH
             rm -rf ./i18n
             docker compose down
