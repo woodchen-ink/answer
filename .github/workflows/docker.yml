@@ -157,34 +157,21 @@ jobs:
           username: ${{ env.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.ACCESS_TOKEN }}
 
-      - name: Create and push multi-arch image
+      - name: Create and push multi-arch manifest
         run: |
-          # 创建一个新的 builder 实例
-          docker buildx create --use --name mybuilder
+          # 创建多架构 manifest
+          docker manifest create ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest \
+            ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:amd64-latest \
+            ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:arm64-latest
 
-          # 检查每个架构的镜像是否存在
-          for platform in amd64 arm64; do
-            if ! docker manifest inspect ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:${platform}-latest > /dev/null 2>&1; then
-              echo "Error: Image ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:${platform}-latest not found"
-              exit 1
-            fi
-          done
+          # 添加架构特定的注释
+          docker manifest annotate ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest \
+            ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:amd64-latest --arch amd64
+          docker manifest annotate ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest \
+            ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:arm64-latest --arch arm64
 
-          # 创建 Dockerfile
-          cat << EOF > Dockerfile
-          FROM scratch
-          COPY --from=baseimage / /
-          EOF
-
-          # 使用 buildx 创建多架构镜像
-          docker buildx build \
-            --platform linux/amd64,linux/arm64 \
-            --tag ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest \
-            --build-context baseimage-amd64=${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:amd64-latest \
-            --build-context baseimage-arm64=${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:arm64-latest \
-            --build-arg TARGETARCH \
-            --push \
-            .
+          # 推送 manifest
+          docker manifest push ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
 
       - name: Verify multi-arch image
         run: |
