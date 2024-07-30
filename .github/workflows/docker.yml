@@ -170,15 +170,21 @@ jobs:
             fi
           done
 
+          # 创建 Dockerfile
+          cat << EOF > Dockerfile
+          FROM scratch
+          COPY --from=baseimage / /
+          EOF
+
           # 使用 buildx 创建多架构镜像
           docker buildx build \
             --platform linux/amd64,linux/arm64 \
             --tag ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest \
+            --build-context baseimage-amd64=${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:amd64-latest \
+            --build-context baseimage-arm64=${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:arm64-latest \
+            --build-arg TARGETARCH \
             --push \
-            - <<EOF
-          FROM scratch
-          COPY --from=${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:\${TARGETARCH}-latest / /
-          EOF
+            .
 
       - name: Verify multi-arch image
         run: |
