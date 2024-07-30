@@ -166,7 +166,7 @@ backend:
       cannot_update:
         other: No permission to update.
       question_closed_cannot_add:
-        other: Posts are closed and cannot be added.
+        other: Questions are closed and cannot be added.
     comment:
       edit_without_permission:
         other: Comment are not allowed to edit.
@@ -361,7 +361,7 @@ backend:
       name:
         other: needs details or clarity
       desc:
-        other: This question currently includes multiple Posts in one. It should focus on one problem only.
+        other: This question currently includes multiple questions in one. It should focus on one problem only.
     looks_ok:
       name:
         other: looks OK
@@ -399,7 +399,7 @@ backend:
           other: needs details or clarity
         desc:
           other:
-            This question currently includes multiple Posts in one. It should
+            This question currently includes multiple questions in one. It should
             focus on one problem only.
       other:
         name:
@@ -415,8 +415,8 @@ backend:
         other: modified
     deleted_title:
       other: Deleted question
-    Posts_title:
-      other: Posts
+    questions_title:
+      other: Questions
   tag:
     tags_title:
       other: Tags
@@ -546,13 +546,13 @@ ui:
     next: Next
   page_title:
     question: Question
-    Posts: Posts
+    questions: Questions
     tag: Tag
     tags: Tags
     tag_wiki: tag wiki
     create_tag: Create Tag
     edit_tag: Edit Tag
-    ask_a_question: Post
+    ask_a_question: Add Question
     edit_question: Edit Question
     edit_answer: Edit Answer
     search: Search
@@ -806,7 +806,7 @@ ui:
     show_more: "{{count}} more comments"
     tip_question: >-
       Use comments to ask for more information or suggest improvements. Avoid
-      answering Posts in comments.
+      answering questions in comments.
     tip_answer: >-
       Use comments to reply to other users or notify them of changes. If you are
       adding new information, edit your post instead of commenting.
@@ -838,16 +838,16 @@ ui:
       newest: Newest
     button_follow: Follow
     button_following: Following
-    tag_label: Posts
+    tag_label: questions
     search_placeholder: Filter by tag name
     no_desc: The tag has no description.
     more: More
   ask:
-    title: Post
+    title: Add Question
     edit_title: Edit Question
     default_reason: Edit question
-    default_first_reason: Post
-    similar_Posts: Similar Posts
+    default_first_reason: Add question
+    similar_questions: Similar questions
     form:
       fields:
         revision:
@@ -888,7 +888,7 @@ ui:
     tag_required_text: Required tag (at least one)
   header:
     nav:
-      question: Posts
+      question: Questions
       tag: Tags
       user: Users
       profile: Profile
@@ -898,24 +898,12 @@ ui:
       review: Review
       bookmark: Bookmarks
       moderation: Moderation
-      quicklinks: Quick links
-      announcement: Announcement
-      help: Help
-      information-sharing: Infor sharing
-      resource-sharing: Resource sharing
-      just-talk: Just talk
-      prefecture: Prefecture
-      it: IT
-      virtual-currency: Virtual currency
-      server: Server
-      game: Game
-      banks-money: Banks & Money
-      intl-trade-logistics: Trade & Logistics
     search:
       placeholder: Search
   footer:
-    build_on: 
-      Made with love © {{cc}}.
+    build_on: >-
+      Powered by <1> Apache Answer </1>- the open-source software that powers Q&A
+      communities.<br />Made with love © {{cc}}.
   upload_img:
     name: Change
     loading: loading...
@@ -1055,13 +1043,13 @@ ui:
       turn_on: Turn on
       inbox:
         label: Inbox notifications
-        description: Answers to your Posts, comments, invites, and more.
+        description: Answers to your questions, comments, invites, and more.
       all_new_question:
-        label: All new Posts
-        description: Get notified of all new Posts. Up to 50 Posts per week.
+        label: All new questions
+        description: Get notified of all new questions. Up to 50 questions per week.
       all_new_question_for_following_tags:
-        label: All new Posts for following tags
-        description: Get notified of new Posts for following tags.
+        label: All new questions for following tags
+        description: Get notified of new questions for following tags.
     account:
       heading: Account
       change_email_btn: Change email
@@ -1108,7 +1096,7 @@ ui:
     review: Your revision will show after review.
     sent_success: Sent successfully
   related_question:
-    title: Related Posts
+    title: Related Questions
     answers: answers
   invite_to_answer:
     title: Invite People
@@ -1180,9 +1168,9 @@ ui:
   delete:
     title: Delete this post
     question: >-
-      We do not recommend <strong>deleting Posts with answers</strong> because
+      We do not recommend <strong>deleting questions with answers</strong> because
       doing so deprives future readers of this knowledge.</p><p>Repeated deletion
-      of answered Posts can result in your account being blocked from asking.
+      of answered questions can result in your account being blocked from asking.
       Are you sure you wish to delete?
     answer_accepted: >-
       <p>We do not recommend <strong>deleting accepted answer</strong> because
@@ -1207,7 +1195,7 @@ ui:
     signup: Sign up
     logout: Log out
     verify: Verify
-    add_question: Post
+    add_question: Add question
     approve: Approve
     reject: Reject
     skip: Skip
@@ -1259,9 +1247,9 @@ ui:
       title: Advanced Search Tips
       tag: "<1>[tag]</1> search with a tag"
       user: "<1>user:username</1> search by author"
-      answer: "<1>answers:0</1> unanswered Posts"
+      answer: "<1>answers:0</1> unanswered questions"
       score: "<1>score:3</1> posts with a 3+ score"
-      question: "<1>is:question</1> search Posts"
+      question: "<1>is:question</1> search questions"
       is_answer: "<1>is:answer</1> search answers"
     empty: We couldn't find anything. <br /> Try different or less specific keywords.
   share:
@@ -1292,12 +1280,12 @@ ui:
     following_tags: Following Tags
     edit: Edit
     save: Save
-    follow_tag_tip: Follow tags to curate your list of Posts.
-    hot_Posts: Hot Posts
-    all_Posts: All Posts
-    x_Posts: "{{ count }} Posts"
+    follow_tag_tip: Follow tags to curate your list of questions.
+    hot_questions: Hot Questions
+    all_questions: All Questions
+    x_questions: "{{ count }} Questions"
     x_answers: "{{ count }} answers"
-    Posts: Posts
+    questions: Questions
     answers: Answers
     newest: Newest
     active: Active
@@ -1314,7 +1302,7 @@ ui:
     overview: Overview
     answers: Answers
     answer: answer
-    Posts: Posts
+    questions: Questions
     question: question
     bookmarks: Bookmarks
     reputation: Reputation
@@ -1330,7 +1318,7 @@ ui:
     about_me: About Me
     about_me_empty: "// Hello, World !"
     top_answers: Top Answers
-    top_Posts: Top Posts
+    top_questions: Top Questions
     stats: Stats
     list_empty: No posts found.<br />Perhaps you'd like to select a different tab?
     accepted: Accepted
@@ -1342,7 +1330,7 @@ ui:
     x_reputation: reputation
     x_votes: votes received
     x_answers: answers
-    x_Posts: Posts
+    x_questions: questions
   install:
     title: Installation
     next: Next
@@ -1454,7 +1442,7 @@ ui:
   nav_menus:
     dashboard: Dashboard
     contents: Contents
-    Posts: Posts
+    questions: Questions
     answers: Answers
     users: Users
     flags: Flags
@@ -1488,7 +1476,7 @@ ui:
       title: Dashboard
       welcome: Welcome to Admin!
       site_statistics: Site statistics
-      Posts: "Posts:"
+      questions: "Questions:"
       answers: "Answers:"
       comments: "Comments:"
       votes: "Votes:"
@@ -1628,13 +1616,13 @@ ui:
         title: Delete this user
         content: Are you sure you want to delete this user? This is permanent!
         remove: Remove their content
-        label: Remove all Posts, answers, comments, etc.
+        label: Remove all questions, answers, comments, etc.
         text: Don’t check this if you wish to only delete the user’s account.
       suspend_user:
         title: Suspend this user
         content: A suspended user can't log in.
-    Posts:
-      page_title: Posts
+    questions:
+      page_title: Questions
       unlisted: Unlisted
       post: Post
       votes: Votes
