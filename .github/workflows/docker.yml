@@ -37,26 +37,19 @@ jobs:
 
       - name: Update go.mod and go.sum
         run: |
-          go get github.com/google/subcommands@latest
-          go get github.com/google/wire/cmd/wire@latest
           go mod download
           go mod tidy
 
-      - name: Generate wire files
+      - name: Generate files
         run: |
-          find . -name "wire.go" -not -path "./internal/repo/repo_test/*" -exec dirname {} \; | xargs -I {} wire {}
-          find . -name "*_gen.go" -not -path "./internal/repo/repo_test/*"
-
-      - name: Generate mock files
-        run: go generate ./...
+          wire ./...
+          go generate ./...
 
       - name: Upload generated files
         uses: actions/upload-artifact@v3
         with:
           name: generated-files
-          path: |
-            **/*_gen.go
-            **/mock_*.go
+          path: .
 
   build:
     needs: generate
@@ -72,6 +65,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: generated-files
+          path: .
 
       - name: Set up Go
         uses: actions/setup-go@v4
@@ -86,7 +80,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential git bash
+          sudo apt-get install -y build-base git bash nodejs npm
           npm install -g pnpm@8.9.2
 
       - name: Build for ${{ matrix.platform }}
