@@ -32,6 +32,8 @@ jobs:
 
       - name: Update go.mod and go.sum
         run: |
+          go get github.com/google/subcommands@latest
+          go get github.com/google/wire/cmd/wire@latest
           go mod download
           go mod tidy
 
@@ -39,6 +41,7 @@ jobs:
         run: |
           which wire
           which mockgen
+          wire ./...
           go generate ./...
 
       - name: Upload generated files
