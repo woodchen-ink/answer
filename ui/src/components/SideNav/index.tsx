@@ -124,10 +124,10 @@ const Index: FC = () => {
             <span>{t('header.nav.intl-trade-logistics')}</span>
           </NavLink>
 
-          <hr />
           <div className="py-2 px-3 mt-3 small">
-            <a href="/tos">{t('tos')}</a> |{' '}
-            <a href="/privacy">{t('privacy')}</a>
+            <hr />
+            <a href="/tos">{t('nav_menus.tos')}</a> |{' '}
+            <a href="/privacy">{t('nav_menus.privacy')}</a>
           </div>
 
           {can_revision || userInfo?.role_id === 2 ? (
