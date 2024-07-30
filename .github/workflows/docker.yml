@@ -40,10 +40,21 @@ jobs:
           go mod download
           go mod tidy
 
-      - name: Generate files
+      - name: Generate wire files
         run: |
-          wire ./...
-          go generate ./...
+          wire ./cmd
+          # Add other directories that need wire here, for example:
+          # wire ./internal/service
+          # wire ./internal/controller
+          # etc.
+
+      - name: Generate mock files
+        run: go generate ./...
+
+      - name: List generated files
+        run: |
+          find . -name "*_gen.go"
+          find . -name "mock_*.go"
 
       - name: Upload generated files
         uses: actions/upload-artifact@v3
@@ -52,60 +63,58 @@ jobs:
           path: .
 
   build:
-    needs: generate
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        platform: [amd64, arm64]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  needs: generate
+  runs-on: ubuntu-latest
+  strategy:
+    matrix:
+      platform: [amd64, arm64]
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Download generated files
-        uses: actions/download-artifact@v3
-        with:
-          name: generated-files
-          path: .
+    - name: Download generated files
+      uses: actions/download-artifact@v3
+      with:
+        name: generated-files
+        path: .
 
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: '1.19'
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.19'
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-base git bash nodejs npm
-          npm install -g pnpm@8.9.2
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-base git bash nodejs npm
+        npm install -g pnpm@8.9.2
 
-      - name: Build for ${{ matrix.platform }}
-        env:
-          GOOS: linux
-          GOARCH: ${{ matrix.platform }}
-          CGO_ENABLED: 0
-          TAGS: "bindata timetzdata sqlite sqlite_unlock_notify"
-        run: |
-          go mod download
-          go mod tidy
-          make build
+    - name: Build for ${{ matrix.platform }}
+      env:
+        GOOS: linux
+        GOARCH: ${{ matrix.platform }}
+        CGO_ENABLED: 0
+        TAGS: "bindata timetzdata sqlite sqlite_unlock_notify"
+      run: make build
 
-      - name: Prepare artifact
-        run: |
-          mkdir -p artifact/usr/bin artifact/data/uploads artifact/data/i18n
-          cp answer artifact/usr/bin/
-          cp -r i18n/*.yaml artifact/data/i18n/
-          tar -czvf artifact-${{ matrix.platform }}.tar.gz -C artifact .
+    - name: Prepare artifact
+      run: |
+        mkdir -p artifact/usr/bin artifact/data/uploads artifact/data/i18n
+        cp answer artifact/usr/bin/
+        cp -r i18n/*.yaml artifact/data/i18n/
+        tar -czvf artifact-${{ matrix.platform }}.tar.gz -C artifact .
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: artifact-${{ matrix.platform }}
-          path: artifact-${{ matrix.platform }}.tar.gz
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: artifact-${{ matrix.platform }}
+        path: artifact-${{ matrix.platform }}.tar.gz
+
 
   push:
     needs: build
