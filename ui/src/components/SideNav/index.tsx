@@ -103,7 +103,7 @@ const Index: FC = () => {
             {t('header.nav.announcement')}
           </CustomNavLink>
 
-          {/* 快捷链接 */}
+          {/* 快捷链接
           <div className="py-2 px-3 mt-3 small fw-bold">
             {t('header.nav.quicklinks')}
           </div>
@@ -118,7 +118,7 @@ const Index: FC = () => {
           </CustomNavLink>
           <CustomNavLink to="/tags/just-talk" icon="chat-heart-fill">
             {t('header.nav.just-talk')}
-          </CustomNavLink>
+          </CustomNavLink> */}
 
           {/* 专区 */}
           <div className="py-2 px-3 mt-3 small fw-bold">
