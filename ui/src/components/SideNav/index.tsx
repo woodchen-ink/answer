@@ -139,6 +139,9 @@ const Index: FC = () => {
           <CustomNavLink to="/tags/music" icon="music-note">
             {t('header.nav.music')}
           </CustomNavLink>
+          <CustomNavLink to="/tags/lifestyles" icon="house-heart">
+            {t('header.nav.lifestyles')}
+          </CustomNavLink>
           <CustomNavLink to="/tags/banks-money" icon="bank">
             {t('header.nav.banks-money')}
           </CustomNavLink>
