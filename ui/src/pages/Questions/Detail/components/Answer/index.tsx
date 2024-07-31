@@ -111,12 +111,12 @@ const Index: FC<Props> = ({
 
           {/* 主要内容 */}
           {data.status === 10 && (
-            <Alert variant="danger" className="mb-4">
+            <Alert variant="danger" className="mb-3">
               {t('post_deleted', { keyPrefix: 'messages' })}
             </Alert>
           )}
           {data.status === 11 && (
-            <Alert variant="secondary" className="mb-4">
+            <Alert variant="secondary" className="mb-3">
               {t('post_pending', { keyPrefix: 'messages' })}
             </Alert>
           )}
@@ -137,7 +137,7 @@ const Index: FC<Props> = ({
           </ImgViewer>
 
           {/* 操作按钮区域 */}
-          <div className="d-flex align-items-center flex-wrap mt-4">
+          <div className="d-flex align-items-center flex-wrap mt-4 mb-3">
             <Actions
               source="answer"
               data={{
@@ -150,12 +150,13 @@ const Index: FC<Props> = ({
                 collectCount: 0,
                 username: data?.user_info?.username,
               }}
+              className="me-3"
             />
             {canAccept && (
               <Button
                 variant={data.accepted === 2 ? 'success' : 'outline-success'}
                 onClick={acceptAnswer}
-                className="ms-3 me-3">
+                className="me-3">
                 <Icon name="check-circle-fill" className="me-2" />
                 <span>
                   {data.accepted === 2
@@ -172,11 +173,9 @@ const Index: FC<Props> = ({
               isAccepted={data.accepted === 2}
               title={questionTitle}
               callback={callback}
-              className="mt-3"
+              className="me-3"
             />
-          </div>
 
-          <div className="mt-3">
             {data.update_user_info &&
             data.update_user_info?.username !== data.user_info?.username ? (
               <UserCard
@@ -187,18 +186,21 @@ const Index: FC<Props> = ({
                 timelinePath={`/posts/${data.question_id}/${data.id}/timeline`}
               />
             ) : isLogged ? (
-              <Link to={`/posts/${data.question_id}/${data.id}/timeline`}>
+              <Link
+                to={`/posts/${data.question_id}/${data.id}/timeline`}
+                className="d-inline-block text-decoration-none"
+                style={{ lineHeight: 1 }}>
                 <FormatTime
                   time={Number(data.update_time)}
                   preFix={t('edit')}
-                  className="link-secondary small"
+                  className="link-secondary small p-0 line-height-21"
                 />
               </Link>
             ) : (
               <FormatTime
                 time={Number(data.update_time)}
                 preFix={t('edit')}
-                className="text-secondary small"
+                className="text-secondary small line-height-21"
               />
             )}
           </div>

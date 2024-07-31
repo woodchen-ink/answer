@@ -188,9 +188,9 @@ const Index: FC = () => {
         />
       </Col>
       <Col className="page-right-side mt-4 mt-xl-0">
-        <CustomSidebar />
         <FollowingTags />
         <HotQuestions />
+        <CustomSidebar />
       </Col>
     </Row>
   );

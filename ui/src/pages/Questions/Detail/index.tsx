@@ -298,7 +298,6 @@ const Index = () => {
           )}
       </Col>
       <Col className="page-right-side mt-4 mt-xl-0">
-        <CustomSidebar />
         {showInviteToAnswer ? (
           <InviteToAnswer
             questionId={question.id}
@@ -306,6 +305,7 @@ const Index = () => {
           />
         ) : null}
         <RelatedQuestions id={question?.id || ''} />
+        <CustomSidebar />
       </Col>
     </Row>
   );

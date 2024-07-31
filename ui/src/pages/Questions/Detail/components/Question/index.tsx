@@ -128,6 +128,9 @@ const Index: FC<Props> = ({ data, initPage, hasAnswer, isLogged }) => {
       </div>
 
       <div className="d-flex flex-wrap align-items-center small mb-3 text-secondary">
+        {data?.tags?.map((item: any) => {
+          return <Tag className="me-1" key={item.slug_name} data={item} />;
+        })}
         {/* <FormatTime
           time={data.create_time}
           preFix={t('Asked')}
@@ -136,7 +139,7 @@ const Index: FC<Props> = ({ data, initPage, hasAnswer, isLogged }) => {
         <FormatTime
           time={data.update_time}
           preFix={t('update')}
-          className="me-3"
+          className="ms-2 me-3"
         />
         {data?.view_count > 0 && (
           <div className="me-3">
@@ -145,16 +148,10 @@ const Index: FC<Props> = ({ data, initPage, hasAnswer, isLogged }) => {
         )}
       </div>
 
-      <div className="mb-3">
-        {data?.tags?.map((item: any) => {
-          return <Tag className="me-1" key={item.slug_name} data={item} />;
-        })}
-      </div>
-
       <ImgViewer>
         <article
           ref={ref}
-          className="fmt text-break text-wrap mt-4"
+          className="fmt text-break text-wrap mt-3"
           dangerouslySetInnerHTML={{ __html: data?.html }}
         />
       </ImgViewer>
@@ -181,34 +178,32 @@ const Index: FC<Props> = ({ data, initPage, hasAnswer, isLogged }) => {
           hasAnswer={hasAnswer}
           isAccepted={Boolean(data?.accepted_answer_id)}
           callback={initPage}
-          className="mt-3"
+          className="me-3"
         />
-        <div>
-          {data.update_user_info &&
-          data.update_user_info?.username !== data.user_info?.username ? (
-            <UserCard
-              data={data?.update_user_info}
-              time={data.edit_time}
-              preFix={t('edit')}
-              isLogged={isLogged}
-              timelinePath={`/posts/${data.id}/timeline`}
-            />
-          ) : isLogged ? (
-            <Link to={`/posts/${data.id}/timeline`}>
-              <FormatTime
-                time={data.edit_time}
-                preFix={t('edit')}
-                className="link-secondary small"
-              />
-            </Link>
-          ) : (
+        {data.update_user_info &&
+        data.update_user_info?.username !== data.user_info?.username ? (
+          <UserCard
+            data={data?.update_user_info}
+            time={data.edit_time}
+            preFix={t('edit')}
+            isLogged={isLogged}
+            timelinePath={`/posts/${data.id}/timeline`}
+          />
+        ) : isLogged ? (
+          <Link to={`/posts/${data.id}/timeline`} style={{ lineHeight: 1 }}>
             <FormatTime
               time={data.edit_time}
               preFix={t('edit')}
-              className="text-secondary small"
+              className="link-secondary small p-0 line-height-21"
             />
-          )}
-        </div>
+          </Link>
+        ) : (
+          <FormatTime
+            time={data.edit_time}
+            preFix={t('edit')}
+            className="text-secondary small line-height-21"
+          />
+        )}
       </div>
 
       <Comment

@@ -350,7 +350,7 @@ const Index: FC<IProps> = ({
               to={editUrl}
               className={classnames('link-secondary p-0 small ms-3')}
               onClick={(evt) => handleEdit(evt, editUrl)}
-              style={{ lineHeight: '23px' }}>
+              style={{ lineHeight: '21px' }}>
               {item.name}
             </Link>
           );

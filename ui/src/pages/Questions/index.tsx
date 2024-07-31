@@ -75,7 +75,6 @@ const Questions: FC = () => {
         />
       </Col>
       <Col className="page-right-side mt-4 mt-xl-0">
-        <CustomSidebar />
         {!loggedUser.username && (
           <div className="card mb-4">
             <div className="card-body">
@@ -104,6 +103,7 @@ const Questions: FC = () => {
         )}
         {loggedUser.access_token && <FollowingTags />}
         <HotQuestions />
+        <CustomSidebar />
       </Col>
     </Row>
   );
