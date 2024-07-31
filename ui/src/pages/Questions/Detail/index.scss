@@ -22,57 +22,6 @@
   height: 21px !important;
 }
 
-@font-face {
-  font-family: 'CZL';
-  src: url('https://cdn-r2.q58.org/fonts/CZL/CZL_Sans_SC_Thin.woff2') format('woff2');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap
-}
-
-@font-face {
-  font-family: 'CZL';
-  src: url('https://cdn-r2.q58.org/fonts/CZL/CZL_Sans_SC_Black.woff2') format('woff2');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap
-}
-
-@font-face {
-  font-family: 'CZL';
-  src: url('https://cdn-r2.q58.org/fonts/CZL/CZL_Sans_SC_Bold.woff2') format('woff2');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap
-}
-
-@font-face {
-  font-family: 'CZL';
-  src: url('https://cdn-r2.q58.org/fonts/CZL/CZL_Sans_SC_Light.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap
-}
-
-@font-face {
-  font-family: 'CZL';
-  src: url('https://cdn-r2.q58.org/fonts/CZL/CZL_Sans_SC_Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap
-}
-
-@font-face {
-  font-family: 'CZL';
-  src: url('https://cdn-r2.q58.org/fonts/CZL/CZL_Sans_SC_Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap
-}
-
-* {
-  font-family: "CZL", -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', miui, 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif !important;
-}
 
 #reaction-button-tooltip {
   .popover-body {
@@ -84,8 +33,7 @@
         background-color: var(--bs-gray-100);
       }
 
-      &:active,
-      &.active {
+      &:active,&.active {
         background-color: var(--bs-gray-200);
       }
     }
