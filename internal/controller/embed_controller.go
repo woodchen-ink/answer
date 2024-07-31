@@ -55,8 +55,7 @@ func (c *EmbedController) GetEmbedConfig(ctx *gin.Context) {
 			for _, field := range fn.ConfigFields() {
 				resp = append(resp, &schema.GetEmbedOptionResp{
 					Platform: field.Name,
-					// Enable:   field.Value.(bool),
-					Enable: true, // 将所有选项的 Enable 设置为 true
+					Enable:   field.Value.(bool),
 				})
 			}
 			return nil

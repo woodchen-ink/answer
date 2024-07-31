@@ -46,6 +46,8 @@ const Index: FC = () => {
   const navigate = useNavigate();
   const routeParams = useParams();
   const curTagName = routeParams.tagName || '';
+  // 创建动态的发帖 URL
+  const askUrl = `/questions/ask?tags=${encodeURIComponent(curTagName)}`;
   const [urlSearchParams] = useSearchParams();
   const curOrder = (urlSearchParams.get('order') ||
     QUESTION_ORDER_KEYS[0]) as Type.QuestionOrderBy;
@@ -150,9 +152,15 @@ const Index: FC = () => {
               </Link>
             </p>
 
-            <div className="box-ft">
+            <div className="box-ft d-flex align-items-center">
+              <Link
+                to={askUrl}
+                className="text-capitalize text-nowrap btn btn-light me-3">
+                <Icon name="plus-circle" className="me-2" />
+                {t('add_question')}
+              </Link>
               {tagInfo.is_follower ? (
-                <div>
+                <>
                   <Button variant="primary" onClick={() => toggleFollow()}>
                     {t('button_following')}
                   </Button>
@@ -161,7 +169,7 @@ const Index: FC = () => {
                     to="/users/settings/notify">
                     <Icon name="bell-fill" />
                   </Link>
-                </div>
+                </>
               ) : (
                 <Button
                   variant="outline-primary"

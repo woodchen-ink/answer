@@ -842,6 +842,7 @@ ui:
     search_placeholder: Filter by tag name
     no_desc: The tag has no description.
     more: More
+    add_question: Add question
   ask:
     title: Add Question
     edit_title: Edit Question
@@ -911,7 +912,7 @@ ui:
       game: Game
       music: Music
       banks-money: Banks & Money
-      intl-trade-logistics: Trade & Logistics
+      trade-logistics: Trade & Logistics
     search:
       placeholder: Search
   footer:

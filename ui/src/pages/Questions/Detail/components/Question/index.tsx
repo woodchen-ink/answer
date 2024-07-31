@@ -107,13 +107,32 @@ const Index: FC<Props> = ({ data, initPage, hasAnswer, isLogged }) => {
         </Link>
       </h1>
 
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <UserCard
+          data={data?.user_info}
+          time={data.create_time}
+          preFix={t('asked')}
+          isLogged={isLogged}
+          timelinePath={`/posts/${data.id}/timeline`}
+        />
+        <OverlayTrigger
+          placement="bottom"
+          overlay={<Tooltip id="followTooltip">{t('follow_tip')}</Tooltip>}>
+          <Button
+            variant="outline-secondary"
+            size="sm"
+            onClick={(e) => handleFollow(e)}>
+            {t(followed ? 'Following' : 'Follow')}
+          </Button>
+        </OverlayTrigger>
+      </div>
+
       <div className="d-flex flex-wrap align-items-center small mb-3 text-secondary">
-        <FormatTime
+        {/* <FormatTime
           time={data.create_time}
           preFix={t('Asked')}
           className="me-3"
-        />
-
+        /> */}
         <FormatTime
           time={data.update_time}
           preFix={t('update')}
@@ -124,23 +143,14 @@ const Index: FC<Props> = ({ data, initPage, hasAnswer, isLogged }) => {
             {t('Views')} {formatCount(data.view_count)}
           </div>
         )}
-        <OverlayTrigger
-          placement="bottom"
-          overlay={<Tooltip id="followTooltip">{t('follow_tip')}</Tooltip>}>
-          <Button
-            variant="link"
-            size="sm"
-            className="p-0 btn-no-border"
-            onClick={(e) => handleFollow(e)}>
-            {t(followed ? 'Following' : 'Follow')}
-          </Button>
-        </OverlayTrigger>
       </div>
-      <div className="m-n1">
+
+      <div className="mb-3">
         {data?.tags?.map((item: any) => {
-          return <Tag className="m-1" key={item.slug_name} data={item} />;
+          return <Tag className="me-1" key={item.slug_name} data={item} />;
         })}
       </div>
+
       <ImgViewer>
         <article
           ref={ref}
@@ -149,33 +159,31 @@ const Index: FC<Props> = ({ data, initPage, hasAnswer, isLogged }) => {
         />
       </ImgViewer>
 
-      <Actions
-        className="mt-4"
-        source="question"
-        data={{
-          id: data?.id,
-          isHate: data?.vote_status === 'vote_down',
-          isLike: data?.vote_status === 'vote_up',
-          votesCount: data?.vote_count,
-          collected: data?.collected,
-          collectCount: data?.collection_count,
-          username: data.user_info?.username,
-        }}
-      />
-
-      <div className="d-block d-md-flex flex-wrap mt-4 mb-3">
-        <div className="mb-3 mb-md-0 me-4 flex-grow-1">
-          <Operate
-            qid={data?.id}
-            type="question"
-            memberActions={data?.member_actions}
-            title={data.title}
-            hasAnswer={hasAnswer}
-            isAccepted={Boolean(data?.accepted_answer_id)}
-            callback={initPage}
-          />
-        </div>
-        <div style={{ minWidth: '196px' }} className="mb-3 me-4 mb-md-0">
+      <div className="d-flex  align-items-center flex-wrap mt-4 mb-3">
+        <Actions
+          source="question"
+          data={{
+            id: data?.id,
+            isHate: data?.vote_status === 'vote_down',
+            isLike: data?.vote_status === 'vote_up',
+            votesCount: data?.vote_count,
+            collected: data?.collected,
+            collectCount: data?.collection_count,
+            username: data.user_info?.username,
+          }}
+          className="me-3"
+        />
+        <Operate
+          qid={data?.id}
+          type="question"
+          memberActions={data?.member_actions}
+          title={data.title}
+          hasAnswer={hasAnswer}
+          isAccepted={Boolean(data?.accepted_answer_id)}
+          callback={initPage}
+          className="mt-3"
+        />
+        <div>
           {data.update_user_info &&
           data.update_user_info?.username !== data.user_info?.username ? (
             <UserCard
@@ -200,15 +208,6 @@ const Index: FC<Props> = ({ data, initPage, hasAnswer, isLogged }) => {
               className="text-secondary small"
             />
           )}
-        </div>
-        <div style={{ minWidth: '196px' }}>
-          <UserCard
-            data={data?.user_info}
-            time={data.create_time}
-            preFix={t('asked')}
-            isLogged={isLogged}
-            timelinePath={`/posts/${data.id}/timeline`}
-          />
         </div>
       </div>
 

@@ -19,19 +19,24 @@
 
 import { memo, FC } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import classnames from 'classnames';
 
-import { Avatar, FormatTime } from '@/components';
+import { Avatar, FormatTime, Icon } from '@/components';
 import { formatCount } from '@/utils';
 
 interface Props {
   data: any;
-  time: number;
-  preFix: string;
-  isLogged: boolean;
-  timelinePath: string;
+  time?: number;
+  preFix?: string;
+  isLogged?: boolean;
+  timelinePath?: string;
   className?: string;
+  showAvatar?: boolean;
+  avatarSize?: string;
+  avatarClass?: string;
+  showUsername?: boolean;
 }
 
 const Index: FC<Props> = ({
@@ -41,65 +46,61 @@ const Index: FC<Props> = ({
   isLogged,
   timelinePath,
   className = '',
+  showAvatar = true,
+  avatarSize = '40px',
+  avatarClass = '',
+  showUsername = true,
 }) => {
+  const { t } = useTranslation();
+  const renderAvatar = () => {
+    if (!showAvatar) return null;
+
+    const avatarElement = (
+      <Avatar
+        avatar={data?.avatar}
+        size={avatarSize}
+        className={classnames('me-2', avatarClass)}
+        searchStr={`s=${parseInt(avatarSize, 10) * 2}`}
+        alt={data?.display_name}
+      />
+    );
+
+    return data?.status !== 'deleted' ? (
+      <Link to={`/users/${data?.username}`}>{avatarElement}</Link>
+    ) : (
+      avatarElement
+    );
+  };
+
+  const renderUsername = () => {
+    if (!showUsername) return null;
+
+    return data?.status !== 'deleted' ? (
+      <Link
+        to={`/users/${data?.username}`}
+        className="me-1 text-break name-ellipsis"
+        style={{ maxWidth: '100px' }}>
+        {data?.display_name}
+      </Link>
+    ) : (
+      <span className="me-1 text-break">{data?.display_name}</span>
+    );
+  };
+
   return (
     <div className={classnames('d-flex', className)}>
-      {data?.status !== 'deleted' ? (
-        <Link to={`/users/${data?.username}`}>
-          <Avatar
-            avatar={data?.avatar}
-            size="40px"
-            className="me-2 d-none d-md-block"
-            searchStr="s=96"
-            alt={data?.display_name}
-          />
-
-          <Avatar
-            avatar={data?.avatar}
-            size="24px"
-            className="me-2 d-block d-md-none"
-            searchStr="s=48"
-            alt={data?.display_name}
-          />
-        </Link>
-      ) : (
-        <>
-          <Avatar
-            avatar={data?.avatar}
-            size="40px"
-            className="me-2 d-none d-md-block"
-            searchStr="s=96"
-            alt={data?.display_name}
-          />
-
-          <Avatar
-            avatar={data?.avatar}
-            size="24px"
-            className="me-2 d-block d-md-none"
-            searchStr="s=48"
-            alt={data?.display_name}
-          />
-        </>
-      )}
+      {renderAvatar()}
       <div className="small text-secondary d-flex flex-row flex-md-column align-items-center align-items-md-start">
         <div className="me-1 me-md-0 d-flex align-items-center">
-          {data?.status !== 'deleted' ? (
-            <Link
-              to={`/users/${data?.username}`}
-              className="me-1 text-break name-ellipsis"
-              style={{ maxWidth: '100px' }}>
-              {data?.display_name}
-            </Link>
-          ) : (
-            <span className="me-1 text-break">{data?.display_name}</span>
-          )}
-          <span className="fw-bold" title="Reputation">
+          {renderUsername()}
+          <span className="fw-bold ms-2" title={t('personal.reputation')}>
+            <Icon name="trophy" className="me-1" />
             {formatCount(data?.rank)}
           </span>
         </div>
         {time &&
           (isLogged ? (
-            <Link to={timelinePath}>
+            <Link to={timelinePath || '#'}>
               <FormatTime
                 time={time}
                 preFix={preFix}

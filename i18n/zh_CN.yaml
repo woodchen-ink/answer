@@ -106,7 +106,7 @@ backend:
     rank_answer_vote_down_label:
       other: 点踩答案
     rank_invite_someone_to_answer_label:
-      other: 邀请回答
+      other: 邀请回帖
     rank_tag_add_label:
       other: 创建新标签
     rank_tag_edit_label:
@@ -122,7 +122,7 @@ backend:
     rank_question_audit_label:
       other: 审核帖子编辑
     rank_answer_audit_label:
-      other: 审核回答编辑
+      other: 审核回帖编辑
     rank_tag_audit_label:
       other: 审核标签编辑
     rank_tag_edit_without_review_label:
@@ -336,7 +336,7 @@ backend:
         other: 不是答案
       desc:
         other:
-          - 这张贴作为答案，但它不会试图回答
+          - 这张贴作为答案，但它不会试图回帖
           - 这可能是一个编辑、一个评论、另一个帖子。
           - 或全部删除。
     no_longer_needed:
@@ -375,7 +375,7 @@ backend:
       name:
         other: 需要关闭
       desc:
-        other: 关闭的帖子不能回答，但仍然可以编辑、投票和评论。
+        other: 关闭的帖子不能回帖，但仍然可以编辑、投票和评论。
     needs_delete:
       name:
         other: 需要删除
@@ -409,7 +409,7 @@ backend:
       asked:
         other: 发帖于
       answered:
-        other: 回答于
+        other: 回帖于
       modified:
         other: 修改于
     deleted_title:
@@ -426,7 +426,7 @@ backend:
       update_question:
         other: 更新了帖子
       answer_the_question:
-        other: 回答了帖子
+        other: 回帖了帖子
       update_answer:
         other: 更新了答案
       accept_answer:
@@ -454,11 +454,11 @@ backend:
       up_voted_answer:
         other: 点赞答案
       down_voted_answer:
-        other: 点踩回答
+        other: 点踩回帖
       up_voted_comment:
         other: 点赞评论
       invited_you_to_answer:
-        other: 邀请你回答
+        other: 邀请你回帖
   email_tpl:
     change_email:
       title:
@@ -467,12 +467,12 @@ backend:
         other: "请点击以下链接确认你在 {{.SiteName}} 上的新邮箱地址：<br>\n<a href='{{.ChangeEmailUrl}}' target='_blank'>{{.ChangeEmailUrl}}</a><br><br>\n\n如果你没有请求此更改，请忽略此邮件。\n"
     new_answer:
       title:
-        other: "[{{.SiteName}}] {{.DisplayName}} 回答了你的帖子"
+        other: "[{{.SiteName}}] {{.DisplayName}} 回帖了你的帖子"
       body:
         other: "<a href='{{.AnswerUrl}}'>{{.QuestionTitle}}</a><br><br>\n\n{{.DisplayName}}：<br>\n<blockquote>{{.AnswerSummary}}</blockquote><br>\n<a href='{{.AnswerUrl}}'>在 {{.SiteName}} 上查看</a><br><br>\n\n--<br>\n<small><a href='{{.UnsubscribeUrl}}'>取消订阅</a></small>"
     invited_you_to_answer:
       title:
-        other: "[{{.SiteName}}] {{.DisplayName}} 邀请您回答帖子"
+        other: "[{{.SiteName}}] {{.DisplayName}} 邀请您回帖帖子"
       body:
         other: "<a href='{{.InviteUrl}}'>{{.QuestionTitle}}</a><br><br>\n\n{{.DisplayName}}：<br>\n<blockquote>我想你可能知道答案。</blockquote><br>\n<a href='{{.InviteUrl}}'>在 {{.SiteName}} 上查看</a><br><br>\n\n--<br>\n<small><a href='{{.UnsubscribeUrl}}'>取消订阅</a></small>"
     new_comment:
@@ -544,7 +544,7 @@ ui:
     edit_tag: 编辑标签
     ask_a_question: 提帖子
     edit_question: 编辑帖子
-    edit_answer: 编辑回答
+    edit_answer: 编辑回帖
     search: 搜索
     posts_containing: 帖子包含
     settings: 设置
@@ -698,7 +698,7 @@ ui:
     flag_title: 我举报这篇帖子的原因是...
     close_title: 我关闭这篇帖子的原因是...
     review_question_title: 审查帖子
-    review_answer_title: 审查回答
+    review_answer_title: 审查回帖
     review_comment_title: 审查评论
     btn_cancel: 取消
     btn_submit: 提交
@@ -792,20 +792,20 @@ ui:
     btn_cancel: 取消
     show_more: "{{count}} 条剩余评论"
     tip_question: >-
-      使用评论发帖更多信息或者提出改进意见。避免在评论里回答帖子。
+      使用评论发帖更多信息或者提出改进意见。避免在评论里回帖帖子。
     tip_answer: >-
-      使用评论对回答者进行回复，或者通知回答者你已更新了帖子的内容。如果要补充或者完善帖子的内容，请在原帖子中更改。
+      使用评论对回帖者进行回复，或者通知回帖者你已更新了帖子的内容。如果要补充或者完善帖子的内容，请在原帖子中更改。
     tip_vote: 它给帖子添加了一些有用的内容
   edit_answer:
-    title: 编辑回答
-    default_reason: 编辑回答
+    title: 编辑回帖
+    default_reason: 编辑回帖
     default_first_reason: 添加答案
     form:
       fields:
         revision:
           label: 编辑历史
         answer:
-          label: 回答内容
+          label: 回帖内容
           feedback:
             characters: 内容长度至少 6 个字符
         edit_summary:
@@ -826,6 +826,7 @@ ui:
     search_placeholder: 通过标签名称过滤
     no_desc: 此标签无描述。
     more: 更多
+    add_question: 发帖
   ask:
     title: 新增帖子
     edit_title: 编辑帖子
@@ -851,17 +852,17 @@ ui:
           msg:
             empty: 必须选择一个标签
         answer:
-          label: 回答内容
+          label: 回帖内容
           msg:
-            empty: 回答内容不能为空
+            empty: 回帖内容不能为空
         edit_summary:
           label: 编辑备注
           placeholder: >-
             简单描述更改原因（更正拼写、修复语法、改进格式）
     btn_post_question: 提交帖子
     btn_save_edits: 保存更改
-    answer_question: 回答自己的帖子
-    post_question&answer: 提交帖子和回答
+    answer_question: 回帖自己的帖子
+    post_question&answer: 提交帖子和回帖
   tag_selector:
     add_btn: 添加标签
     create_btn: 创建新标签
@@ -872,7 +873,7 @@ ui:
   header:
     nav:
       question: 帖子
-      tag: 主题
+      tag: 标签
       user: 用户
       quicklinks: 快捷链接
       announcement: 公告
@@ -887,7 +888,7 @@ ui:
       game: 游戏
       music: 音乐
       banks-money: 银行&货币
-      intl-trade-logistics: 国际贸易与物流
+      trade-logistics: 贸易&物流
       profile: 用户主页
       setting: 账号设置
       logout: 退出
@@ -1033,7 +1034,7 @@ ui:
       turn_on: 开启
       inbox:
         label: 收件箱通知
-        description: 你的发帖有新的回答，评论，邀请回答和其他。
+        description: 你的发帖有新的回帖，评论，邀请回帖和其他。
       all_new_question:
         label: 所有新帖子
         description: 获取所有新帖子的通知。每周最多有50个帖子。
@@ -1086,11 +1087,11 @@ ui:
     sent_success: 发送成功
   related_question:
     title: 相关帖子
-    answers: 个回答
+    answers: 个回帖
   invite_to_answer:
     title: 受邀人
     desc: 邀请你认为可能知道答案的人。
-    invite: 邀请回答
+    invite: 邀请回帖
     add: 添加人员
     search: 搜索人员
   question_detail:
@@ -1104,7 +1105,7 @@ ui:
     Follow: 关注此帖子
     Following: 已关注
     follow_tip: 关注此帖子以接收通知
-    answered: 回答于
+    answered: 回帖于
     closed_in: 关闭于
     show_exist: 查看类似帖子。
     useful: 有用的
@@ -1114,26 +1115,26 @@ ui:
     answer_useful: 这是有用的
     answer_un_useful: 它是没有用的
     answers:
-      title: 个回答
+      title: 个回帖
       score: 评分
       newest: 最新
       oldest: 最旧
       btn_accept: 采纳
       btn_accepted: 已被采纳
     write_answer:
-      title: 你的回答
-      edit_answer: 编辑我的回答
-      btn_name: 提交你的回答
-      add_another_answer: 添加另一个回答
-      confirm_title: 继续回答
+      title: 你的回帖
+      edit_answer: 编辑我的回帖
+      btn_name: 提交你的回帖
+      add_another_answer: 添加另一个回帖
+      confirm_title: 继续回帖
       continue: 继续
       confirm_info: >-
-        <p>你确定要提交一个新的回答吗？</p><p>作为替代，你可以通过编辑来完善和改进之前的回答。</p>
-      empty: 回答内容不能为空。
+        <p>你确定要提交一个新的回帖吗？</p><p>作为替代，你可以通过编辑来完善和改进之前的回帖。</p>
+      empty: 回帖内容不能为空。
       characters: 内容长度至少 6 个字符。
       tips:
-        header_1: 感谢你的回答
-        li1_1: 请务必确定在 <strong>回答帖子</strong>。提供详细信息并分享你的研究。
+        header_1: 感谢你的回帖
+        li1_1: 请务必确定在 <strong>回帖帖子</strong>。提供详细信息并分享你的研究。
         li1_2: 用参考资料或个人经历来支持你所做的任何陈述。
         header_2: 但是 <strong>请避免</strong>...
         li2_1: 请求帮助，寻求澄清，或答复其他答案。
@@ -1156,11 +1157,11 @@ ui:
   delete:
     title: 删除
     question: >-
-      我们不建议 <strong>删除有回答的帖子</strong>。因为这样做会使得后来的读者无法从该帖子中获得帮助。</p><p>如果删除过多有回答的帖子，你的账号将会被禁止发帖。你确定要删除吗？
+      我们不建议 <strong>删除有回帖的帖子</strong>。因为这样做会使得后来的读者无法从该帖子中获得帮助。</p><p>如果删除过多有回帖的帖子，你的账号将会被禁止发帖。你确定要删除吗？
     answer_accepted: >-
-      <p>我们不建议<strong>删除被采纳的回答</strong>。因为这样做会使得后来的读者无法从该帖子中获得帮助。</p>如果删除过多被采纳的回答，你的账号将会被禁止回答任何发帖。你确定要删除吗？
+      <p>我们不建议<strong>删除被采纳的回帖</strong>。因为这样做会使得后来的读者无法从该帖子中获得帮助。</p>如果删除过多被采纳的回帖，你的账号将会被禁止回帖任何发帖。你确定要删除吗？
     other: 你确定要删除？
-    tip_answer_deleted: 该回答已被删除
+    tip_answer_deleted: 该回帖已被删除
     undelete_title: 撤销删除本帖
     undelete_desc: 你确定你要撤销删除吗？
   btns:
@@ -1185,7 +1186,7 @@ ui:
     pinned: 已置顶
     all: 全部
     question: 帖子
-    answer: 回答
+    answer: 回帖
     comment: 评论
     refresh: 刷新
     resend: 重新发送
@@ -1229,10 +1230,10 @@ ui:
       title: 高级搜索提示
       tag: "<1>[tag]</1> 在指定标签中搜索"
       user: "<1>user:username</1> 根据作者搜索"
-      answer: "<1>answers:0</1> 搜索未回答的帖子"
+      answer: "<1>answers:0</1> 搜索未回帖的帖子"
       score: "<1>score:3</1> 评分 3+ 的帖子"
       question: "<1>is:question</1> 搜索帖子"
-      is_answer: "<1>is:answer</1> 搜索回答"
+      is_answer: "<1>is:answer</1> 搜索回帖"
     empty: 找不到任何相关的内容。<br /> 请尝试其他关键字，或者减少查找内容的长度。
   share:
     name: 分享
@@ -1265,24 +1266,24 @@ ui:
     hot_questions: 热门帖子
     all_questions: 全部帖子
     x_questions: "{{ count }} 个帖子"
-    x_answers: "{{ count }} 个回答"
+    x_answers: "{{ count }} 个回帖"
     questions: 帖子
-    answers: 回答
+    answers: 回帖
     newest: 最新
     active: 活跃
     hot: 热度
     score: 评分
-    unanswered: 未回答
+    unanswered: 未回帖
     modified: 更新于
-    answered: 回答于
+    answered: 回帖于
     asked: 发帖于
     closed: 已关闭
     follow_a_tag: 关注一个标签
     more: 更多
   personal:
     overview: 概览
-    answers: 回答
-    answer: 回答
+    answers: 回帖
+    answer: 回帖
     questions: 帖子
     question: 帖子
     bookmarks: 收藏
@@ -1298,19 +1299,19 @@ ui:
     last_login: 上次登录
     about_me: 关于我
     about_me_empty: "// Hello, World!"
-    top_answers: 高分回答
+    top_answers: 高分回帖
     top_questions: 高分帖子
     stats: 状态
     list_empty: 没有找到相关的内容。<br />试试看其他选项卡？
     accepted: 已采纳
-    answered: 回答于
+    answered: 回帖于
     asked: 发帖于
     downvoted: 点踩
     mod_short: 版主
     mod_long: 版主
     x_reputation: 声望
     x_votes: 得票
-    x_answers: 个回答
+    x_answers: 个回帖
     x_questions: 个帖子
   install:
     title: 安装
@@ -1335,7 +1336,7 @@ ui:
       msg: 数据库地址不能为空
     db_name:
       label: 数据库名
-      placeholder: 回答
+      placeholder: 回帖
       msg: 数据库名称不能为空。
     db_file:
       label: 数据库文件
@@ -1405,7 +1406,7 @@ ui:
   counts:
     views: 次浏览
     votes: 个点赞
-    answers: 个回答
+    answers: 个回帖
     accepted: 已被采纳
   page_error:
     http_error: HTTP 错误 {{ code }}
@@ -1419,7 +1420,7 @@ ui:
     dashboard: 后台管理
     contents: 内容管理
     questions: 帖子
-    answers: 回答
+    answers: 回帖
     users: 用户管理
     flags: 举报管理
     settings: 站点设置
@@ -1452,7 +1453,7 @@ ui:
       welcome: 欢迎来到管理后台！
       site_statistics: 站点统计
       questions: "帖子:"
-      answers: "回答:"
+      answers: "回帖:"
       comments: "评论:"
       votes: "投票:"
       users: "用户:"
@@ -1601,7 +1602,7 @@ ui:
       unlisted: 已隐藏
       post: 标题
       votes: 得票数
-      answers: 回答数
+      answers: 回帖数
       created: 创建于
       status: 状态
       action: 操作
@@ -1610,7 +1611,7 @@ ui:
       filter:
         placeholder: "按标题过滤，帖子:id"
     answers:
-      page_title: 回答
+      page_title: 回帖
       post: 标题
       votes: 得票数
       created: 创建于
@@ -1725,7 +1726,7 @@ ui:
       page_title: 编辑
       restrict_answer:
         title: Answer write
-        label: 每个用户对于每个帖子只能有一个回答
+        label: 每个用户对于每个帖子只能有一个回帖
         text: "Turn off to allow users to write multiple answers to the same question, which may cause answers to be unfocused."
       recommend_tags:
         label: 推荐标签
@@ -1859,11 +1860,11 @@ ui:
     review: 评论
     proposed: 提案
     question_edit: 帖子编辑
-    answer_edit: 回答编辑
+    answer_edit: 回帖编辑
     tag_edit: '标签管理: 编辑标签'
     edit_summary: 编辑备注
     edit_question: 编辑帖子
-    edit_answer: 编辑回答
+    edit_answer: 编辑回帖
     edit_tag: 编辑标签
     empty: 没有剩余的审核任务。
     approve_revision_tip: 您是否批准此修订？
@@ -1892,7 +1893,7 @@ ui:
     commented: '评论:'
     rollback: 回滚
     edited: 最后编辑于
-    answered: 回答于
+    answered: 回帖于
     asked: 发帖于
     closed: 关闭
     reopened: 重新开启
@@ -1906,7 +1907,7 @@ ui:
     show_votes: "显示投票"
     n_or_a: N/A
     title_for_question: "时间线"
-    title_for_answer: "{{ title }} 的 {{ author }} 回答时间线"
+    title_for_answer: "{{ title }} 的 {{ author }} 回帖时间线"
     title_for_tag: "时间线"
     datetime: 日期时间
     type: 类型

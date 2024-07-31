@@ -226,6 +226,7 @@ const Header: FC = () => {
             <Link
               to={askUrl}
               className="text-capitalize text-nowrap btn btn-light">
+              <Icon name="plus-circle" className="me-2" />
               {t('btns.add_question')}
             </Link>
           </Nav.Item>
@@ -242,6 +243,7 @@ const Header: FC = () => {
                       'btn-light': navbarStyle !== 'theme-light',
                       'btn-primary': navbarStyle === 'theme-light',
                     })}>
+                    <Icon name="plus-circle" className="me-2" />
                     {t('btns.add_question')}
                   </Link>
                 </Nav.Item>

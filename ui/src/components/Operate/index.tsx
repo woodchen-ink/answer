@@ -22,6 +22,8 @@ import { Button, Dropdown } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import classnames from 'classnames';
+
 import { Modal } from '@/components';
 import { useReportModal, useToast } from '@/hooks';
 import { useCaptchaPlugin } from '@/utils/pluginKit';
@@ -49,6 +51,8 @@ interface IProps {
   isAccepted: boolean;
   callback: (type: string) => void;
   memberActions;
+  // inline?: boolean; // 新增 prop 来控制是否内联显示
+  className?: string; // 新增用来允许自定义样式
 }
 const Index: FC<IProps> = ({
   type,
@@ -59,6 +63,8 @@ const Index: FC<IProps> = ({
   hasAnswer = false,
   memberActions = [],
   callback,
+  // inline = false, // 默认为 false，保持原有行为
+  className = '', // 添加默认值
 }) => {
   const { t } = useTranslation('translation', { keyPrefix: 'delete' });
   const toast = useToast();
@@ -334,7 +340,7 @@ const Index: FC<IProps> = ({
     ) || [];
 
   return (
-    <div className="d-flex align-items-center">
+    <div className={classnames('d-flex align-items-center', className)}>
       <Share type={type} qid={qid} aid={aid} title={title} />
       {firstAction?.map((item) => {
         if (item.action === 'edit') {
@@ -342,7 +348,7 @@ const Index: FC<IProps> = ({
             <Link
               key={item.action}
               to={editUrl}
-              className="link-secondary p-0 small ms-3"
+              className={classnames('link-secondary p-0 small ms-3')}
               onClick={(evt) => handleEdit(evt, editUrl)}
               style={{ lineHeight: '23px' }}>
               {item.name}
@@ -354,14 +360,14 @@ const Index: FC<IProps> = ({
             key={item.action}
             variant="link"
             size="sm"
-            className="link-secondary p-0 ms-3"
+            className={classnames('link-secondary p-0 ms-3')}
             onClick={() => handleAction(item.action)}>
             {item.name}
           </Button>
         );
       })}
       {secondAction.length > 0 && (
-        <Dropdown className="ms-3 d-flex">
+        <Dropdown className={classnames('ms-3 d-flex')}>
           <Dropdown.Toggle
             variant="link"
             size="sm"

@@ -31,21 +31,7 @@ const Index: FC = () => {
   const { pageTitle, keywords, description } = pageTagStore(
     (state) => state.items,
   );
-  const appVersion = siteInfoStore((_) => _.version);
-  const hashVersion = siteInfoStore((_) => _.revision);
   const siteName = siteInfoStore((_) => _.siteInfo).name;
-  const setAppGenerator = () => {
-    if (!appVersion) {
-      return;
-    }
-    const generatorMetaNode = document.querySelector('meta[name="generator"]');
-    if (generatorMetaNode) {
-      generatorMetaNode.setAttribute(
-        'content',
-        `Answer ${appVersion} - https://github.com/apache/incubator-answer version ${hashVersion}`,
-      );
-    }
-  };
   const setDocTitle = () => {
     try {
       if (pageTitle) {
@@ -72,9 +58,6 @@ const Index: FC = () => {
   useEffect(() => {
     setDocLang();
   }, [currentLang]);
-  useEffect(() => {
-    setAppGenerator();
-  }, [appVersion]);
   useLayoutEffect(() => {
     setDocTitle();
   }, [pageTitle]);

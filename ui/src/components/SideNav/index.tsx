@@ -28,6 +28,34 @@ import { loggedUserInfoStore, sideNavStore } from '@/stores';
 import { Icon } from '@/components';
 import './index.scss';
 
+// 自定义 NavLink 组件
+interface CustomNavLinkProps {
+  to: string;
+  icon?: string;
+  children: React.ReactNode;
+  active?: boolean;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+}
+
+const CustomNavLink: FC<CustomNavLinkProps> = ({
+  to,
+  icon,
+  children,
+  active,
+  onClick,
+}) => (
+  <NavLink
+    to={to}
+    className={({ isActive }) =>
+      classnames('nav-link d-flex align-items-center', {
+        active: isActive || active,
+      })
+    }
+    onClick={onClick}>
+    {icon && <Icon name={icon} className="me-2 flex-shrink-0" />}
+    <span className="text-truncate">{children}</span>
+  </NavLink>
+);
 const Index: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -39,6 +67,7 @@ const Index: FC = () => {
     e.preventDefault();
     navigate(path);
   };
+
   return (
     <Col
       xl={2}
@@ -51,88 +80,73 @@ const Index: FC = () => {
       id="sideNav">
       <div className="nav-wrap pt-4">
         <Nav variant="pills" className="flex-column">
-          <NavLink
+          <CustomNavLink
             to="/questions"
-            className={({ isActive }) =>
-              isActive || pathname === '/' ? 'nav-link active' : 'nav-link'
-            }>
-            <Icon name="question-circle-fill" className="me-2" />
-            <span>{t('header.nav.question')}</span>
-          </NavLink>
+            icon="question-circle-fill"
+            active={pathname === '/' || pathname === '/questions'}>
+            {t('header.nav.question')}
+          </CustomNavLink>
 
-          <Nav.Link
-            href="/tags"
+          <CustomNavLink
+            to="/tags"
+            icon="tags-fill"
             active={pathname === '/tags'}
             onClick={(e) => handleNavClick(e, '/tags')}>
-            <Icon name="tags-fill" className="me-2" />
-            <span>{t('header.nav.tag')}</span>
-          </Nav.Link>
+            {t('header.nav.tag')}
+          </CustomNavLink>
 
-          <NavLink to="/users" className="nav-link">
-            <Icon name="people-fill" className="me-2" />
-            <span>{t('header.nav.user')}</span>
-          </NavLink>
+          <CustomNavLink to="/users" icon="people-fill">
+            {t('header.nav.user')}
+          </CustomNavLink>
 
-          <NavLink to="/tags/announcement" className="nav-link">
-            <Icon name="megaphone-fill" className="me-2" />
-            <span>{t('header.nav.announcement')}</span>
-          </NavLink>
+          <CustomNavLink to="/tags/announcement" icon="megaphone-fill">
+            {t('header.nav.announcement')}
+          </CustomNavLink>
 
           {/* 快捷链接 */}
           <div className="py-2 px-3 mt-3 small fw-bold">
             {t('header.nav.quicklinks')}
           </div>
-          <NavLink to="/tags/help" className="nav-link">
-            <Icon name="life-preserver" className="me-2" />
-            <span>{t('header.nav.help')}</span>
-          </NavLink>
-          <NavLink to="/tags/information-sharing" className="nav-link">
-            <Icon name="share-fill" className="me-2" />
-            <span>{t('header.nav.information-sharing')}</span>
-          </NavLink>
-          <NavLink to="/tags/resource-sharing" className="nav-link">
-            <Icon name="folder-symlink-fill" className="me-2" />
-            <span>{t('header.nav.resource-sharing')}</span>
-          </NavLink>
-          <NavLink to="/tags/just-talk" className="nav-link">
-            <Icon name="chat-heart-fill" className="me-2" />
-            <span>{t('header.nav.just-talk')}</span>
-          </NavLink>
+          <CustomNavLink to="/tags/help" icon="life-preserver">
+            {t('header.nav.help')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/information-sharing" icon="share-fill">
+            {t('header.nav.information-sharing')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/resource-sharing" icon="folder-symlink-fill">
+            {t('header.nav.resource-sharing')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/just-talk" icon="chat-heart-fill">
+            {t('header.nav.just-talk')}
+          </CustomNavLink>
 
           {/* 专区 */}
           <div className="py-2 px-3 mt-3 small fw-bold">
             {t('header.nav.prefecture')}
           </div>
-          <NavLink to="/tags/it996007" className="nav-link">
-            <Icon name="code-slash" className="me-2" />
-            <span>{t('header.nav.it')}</span>
-          </NavLink>
-          <NavLink to="/tags/virtual-currency" className="nav-link">
-            <Icon name="coin" className="me-2" />
-            <span>{t('header.nav.virtual-currency')}</span>
-          </NavLink>
-          <NavLink to="/tags/server" className="nav-link">
-            <Icon name="hdd-stack" className="me-2" />
-            <span>{t('header.nav.server')}</span>
-          </NavLink>
-          <NavLink to="/tags/game" className="nav-link">
-            <Icon name="controller" className="me-2" />
-            <span>{t('header.nav.game')}</span>
-          </NavLink>
-          <NavLink to="/tags/music" className="nav-link">
-            <Icon name="music-note" className="me-2" />
-            <span>{t('header.nav.music')}</span>
-          </NavLink>
-          <NavLink to="/tags/banks-money" className="nav-link">
-            <Icon name="bank" className="me-2" />
-            <span>{t('header.nav.banks-money')}</span>
-          </NavLink>
-          <NavLink to="/tags/intl-trade-logistics" className="nav-link">
-            <Icon name="buildings" className="me-2" />
-            <span>{t('header.nav.intl-trade-logistics')}</span>
-          </NavLink>
+          <CustomNavLink to="/tags/it996007" icon="code-slash">
+            {t('header.nav.it')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/virtual-currency" icon="coin">
+            {t('header.nav.virtual-currency')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/server" icon="hdd-stack">
+            {t('header.nav.server')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/game" icon="controller">
+            {t('header.nav.game')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/music" icon="music-note">
+            {t('header.nav.music')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/banks-money" icon="bank">
+            {t('header.nav.banks-money')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/trade-logistics" icon="buildings">
+            {t('header.nav.trade-logistics')}
+          </CustomNavLink>
 
-          <div className="py-2 px-3 mt-3 small">
+          <div className="py-2 px-3  small">
             <hr />
             <a href="/tos">{t('nav_menus.tos')}</a> |{' '}
             <a href="/privacy">{t('nav_menus.privacy')}</a>
@@ -144,18 +158,18 @@ const Index: FC = () => {
                 {t('header.nav.moderation')}
               </div>
               {can_revision && (
-                <NavLink to="/review" className="nav-link">
+                <CustomNavLink to="/review">
                   <span>{t('header.nav.review')}</span>
                   <span className="float-end">
                     {revision > 99 ? '99+' : revision > 0 ? revision : ''}
                   </span>
-                </NavLink>
+                </CustomNavLink>
               )}
 
               {userInfo?.role_id === 2 ? (
-                <NavLink to="/admin" className="nav-link">
+                <CustomNavLink to="/admin">
                   {t('header.nav.admin')}
-                </NavLink>
+                </CustomNavLink>
               ) : null}
             </>
           ) : null}

@@ -95,115 +95,122 @@ const Index: FC<Props> = ({
 
   return (
     <div id={data.id} ref={answerRef} className="answer-item py-4">
-      {data.status === 10 && (
-        <Alert variant="danger" className="mb-4">
-          {t('post_deleted', { keyPrefix: 'messages' })}
-        </Alert>
-      )}
-      {data.status === 11 && (
-        <Alert variant="secondary" className="mb-4">
-          {t('post_pending', { keyPrefix: 'messages' })}
-        </Alert>
-      )}
-
-      {data?.accepted === 2 && (
-        <div className="mb-3 lh-1">
-          <Badge bg="success" pill>
-            <Icon name="check-circle-fill me-1" />
-            Best answer
-          </Badge>
-        </div>
-      )}
-      <ImgViewer>
-        <article
-          className="fmt text-break text-wrap"
-          dangerouslySetInnerHTML={{ __html: data?.html }}
-        />
-      </ImgViewer>
-      <div className="d-flex align-items-center mt-4">
-        <Actions
-          source="answer"
-          data={{
-            id: data?.id,
-            isHate: data?.vote_status === 'vote_down',
-            isLike: data?.vote_status === 'vote_up',
-            votesCount: data?.vote_count,
-            hideCollect: true,
-            collected: data?.collected,
-            collectCount: 0,
-            username: data?.user_info?.username,
-          }}
-        />
-
-        {canAccept && (
-          <Button
-            variant={data.accepted === 2 ? 'success' : 'outline-success'}
-            className="ms-3"
-            onClick={acceptAnswer}>
-            <Icon name="check-circle-fill" className="me-2" />
-            <span>
-              {data.accepted === 2
-                ? t('answers.btn_accepted')
-                : t('answers.btn_accept')}
-            </span>
-          </Button>
-        )}
-      </div>
-
-      <div className="d-block d-md-flex flex-wrap mt-4 mb-3">
-        <div className="mb-3 mb-md-0 me-4 flex-grow-1">
-          <Operate
-            qid={data.question_id}
-            aid={data.id}
-            memberActions={data?.member_actions}
-            type="answer"
-            isAccepted={data.accepted === 2}
-            title={questionTitle}
-            callback={callback}
-          />
-        </div>
-        <div className="mb-3 mb-md-0 me-4" style={{ minWidth: '196px' }}>
-          {data.update_user_info &&
-          data.update_user_info?.username !== data.user_info?.username ? (
+      <div className="d-flex">
+        {/* 主要内容 */}
+        <div className="content-column flex-grow-1">
+          {/* 用户信息和回复时间 */}
+          <div className="d-flex align-items-center mb-3">
             <UserCard
-              data={data?.update_user_info}
-              time={Number(data.update_time)}
-              preFix={t('edit')}
+              data={data?.user_info}
+              time={Number(data.create_time)}
+              preFix={t('answered')}
               isLogged={isLogged}
               timelinePath={`/posts/${data.question_id}/${data.id}/timeline`}
             />
-          ) : isLogged ? (
-            <Link to={`/posts/${data.question_id}/${data.id}/timeline`}>
+          </div>
+
+          {/* 主要内容 */}
+          {data.status === 10 && (
+            <Alert variant="danger" className="mb-4">
+              {t('post_deleted', { keyPrefix: 'messages' })}
+            </Alert>
+          )}
+          {data.status === 11 && (
+            <Alert variant="secondary" className="mb-4">
+              {t('post_pending', { keyPrefix: 'messages' })}
+            </Alert>
+          )}
+
+          {data?.accepted === 2 && (
+            <div className="mb-3 lh-1">
+              <Badge bg="success" pill>
+                <Icon name="check-circle-fill me-1" />
+                {t('answers.btn_accepted')}
+              </Badge>
+            </div>
+          )}
+          <ImgViewer>
+            <article
+              className="fmt text-break text-wrap"
+              dangerouslySetInnerHTML={{ __html: data?.html }}
+            />
+          </ImgViewer>
+
+          {/* 操作按钮区域 */}
+          <div className="d-flex align-items-center flex-wrap mt-4">
+            <Actions
+              source="answer"
+              data={{
+                id: data?.id,
+                isHate: data?.vote_status === 'vote_down',
+                isLike: data?.vote_status === 'vote_up',
+                votesCount: data?.vote_count,
+                hideCollect: true,
+                collected: data?.collected,
+                collectCount: 0,
+                username: data?.user_info?.username,
+              }}
+            />
+            {canAccept && (
+              <Button
+                variant={data.accepted === 2 ? 'success' : 'outline-success'}
+                onClick={acceptAnswer}
+                className="ms-3 me-3">
+                <Icon name="check-circle-fill" className="me-2" />
+                <span>
+                  {data.accepted === 2
+                    ? t('answers.btn_accepted')
+                    : t('answers.btn_accept')}
+                </span>
+              </Button>
+            )}
+            <Operate
+              qid={data.question_id}
+              aid={data.id}
+              memberActions={data?.member_actions}
+              type="answer"
+              isAccepted={data.accepted === 2}
+              title={questionTitle}
+              callback={callback}
+              className="mt-3"
+            />
+          </div>
+
+          <div className="mt-3">
+            {data.update_user_info &&
+            data.update_user_info?.username !== data.user_info?.username ? (
+              <UserCard
+                data={data?.update_user_info}
+                time={Number(data.update_time)}
+                preFix={t('edit')}
+                isLogged={isLogged}
+                timelinePath={`/posts/${data.question_id}/${data.id}/timeline`}
+              />
+            ) : isLogged ? (
+              <Link to={`/posts/${data.question_id}/${data.id}/timeline`}>
+                <FormatTime
+                  time={Number(data.update_time)}
+                  preFix={t('edit')}
+                  className="link-secondary small"
+                />
+              </Link>
+            ) : (
               <FormatTime
                 time={Number(data.update_time)}
                 preFix={t('edit')}
-                className="link-secondary small"
+                className="text-secondary small"
               />
-            </Link>
-          ) : (
-            <FormatTime
-              time={Number(data.update_time)}
-              preFix={t('edit')}
-              className="text-secondary small"
-            />
-          )}
-        </div>
-        <div style={{ minWidth: '196px' }}>
-          <UserCard
-            data={data?.user_info}
-            time={Number(data.create_time)}
-            preFix={t('answered')}
-            isLogged={isLogged}
-            timelinePath={`/posts/${data.question_id}/${data.id}/timeline`}
+            )}
+          </div>
+
+          {/* 评论区 */}
+          <Comment
+            objectId={data.id}
+            mode="answer"
+            commentId={searchParams.get('commentId')}
           />
         </div>
       </div>
-
-      <Comment
-        objectId={data.id}
-        mode="answer"
-        commentId={searchParams.get('commentId')}
-      />
     </div>
   );
 };
