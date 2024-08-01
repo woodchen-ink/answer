@@ -911,14 +911,18 @@ ui:
       server: Server
       game: Game
       music: Music
+      video: Movie
       read: Read
-      lifestyles: Lifestyles
+      sports: Sports
+      travel: Travel
+      life: Life
+      gossip: Gossip
       banks-money: Banks & Money
       trade-logistics: Trade & Logistics
       transaction: Transaction
       group-purchase: Group purchase
       promotion: Promotion
-      thinking-chitchat: Thinking & Chitchat
+      chitchat: Chitchat
       introduction: Community Introduction
     search:
       placeholder: Search

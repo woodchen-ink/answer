@@ -130,14 +130,23 @@ const Index: FC = () => {
           <CustomNavLink to="/tags/music" icon="music-note">
             {t('header.nav.music')}
           </CustomNavLink>
+          <CustomNavLink to="/tags/video" icon="film">
+            {t('header.nav.video')}
+          </CustomNavLink>
           <CustomNavLink to="/tags/read" icon="book">
             {t('header.nav.read')}
           </CustomNavLink>
-          <CustomNavLink to="/tags/lifestyles" icon="house-heart">
-            {t('header.nav.lifestyles')}
+          <CustomNavLink to="/tags/sports" icon="emoji-sunglasses">
+            {t('header.nav.sports')}
           </CustomNavLink>
-          <CustomNavLink to="/tags/thinking-chitchat" icon="lightbulb">
-            {t('header.nav.thinking-chitchat')}
+          <CustomNavLink to="/tags/life" icon="house-heart">
+            {t('header.nav.life')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/gossip" icon="chat-quote">
+            {t('header.nav.gossip')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/chitchat" icon="lightbulb">
+            {t('header.nav.chitchat')}
           </CustomNavLink>
           {/* 分割线 */}
           <hr className="my-2 mx-1" />

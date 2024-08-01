@@ -887,14 +887,18 @@ ui:
       server: 服务器
       game: 游戏
       music: 音乐
+      video: 视频
       read: 阅读
-      lifestyles: 生活
+      sports: 运动
+      travel: 旅游
+      life: 生活
+      gossip: 八卦
       banks-money: 银行&货币
       trade-logistics: 贸易&物流
       transaction: 交易
       group-purchase: 拼单
       promotion: 推广
-      thinking-chitchat: 思考&闲聊
+      chitchat: 闲聊
       profile: 用户主页
       setting: 账号设置
       logout: 退出
