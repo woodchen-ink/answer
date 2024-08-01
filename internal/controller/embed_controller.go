@@ -43,15 +43,9 @@ func NewEmbedController() *EmbedController {
 // @Success 200 {object} handler.RespBody{data=[]schema.GetEmbedOptionResp}
 func (c *EmbedController) GetEmbedConfig(ctx *gin.Context) {
 	resp := make([]*schema.GetEmbedOptionResp, 0)
-	var slugName string
-
-	_ = plugin.CallEmbed(func(base plugin.Embed) error {
-		slugName = base.Info().SlugName
-		return nil
-	})
 
 	_ = plugin.CallConfig(func(fn plugin.Config) error {
-		if fn.Info().SlugName == slugName {
+		if fn.Info().SlugName == "basic_embed" {
 			for _, field := range fn.ConfigFields() {
 				resp = append(resp, &schema.GetEmbedOptionResp{
 					Platform: field.Name,
