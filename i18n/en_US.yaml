@@ -911,6 +911,7 @@ ui:
       server: Server
       game: Game
       music: Music
+      read: Read
       lifestyles: Lifestyles
       banks-money: Banks & Money
       trade-logistics: Trade & Logistics
