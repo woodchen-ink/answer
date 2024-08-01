@@ -915,6 +915,9 @@ ui:
       lifestyles: Lifestyles
       banks-money: Banks & Money
       trade-logistics: Trade & Logistics
+      transaction: Transaction
+      group-purchase: Group purchase
+      promotion: Promotion
     search:
       placeholder: Search
   footer:

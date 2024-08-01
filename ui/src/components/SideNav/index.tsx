@@ -151,6 +151,16 @@ const Index: FC = () => {
           <CustomNavLink to="/tags/trade-logistics" icon="buildings">
             {t('header.nav.trade-logistics')}
           </CustomNavLink>
+          {/* 交易,拼单和推广 */}
+          <CustomNavLink to="/tags/transaction" icon="currency-exchange">
+            {t('header.nav.transaction')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/group-purchase" icon="cart-plus">
+            {t('header.nav.group-purchase')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/promotion" icon="broadcast">
+            {t('header.nav.promotion')}
+          </CustomNavLink>
 
           <div className="py-2 px-3  small">
             <hr />
