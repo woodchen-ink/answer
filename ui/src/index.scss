@@ -352,20 +352,3 @@ img[src=""] {
 .alert-exist {
   color: var(--an-alert-exist-color);
 }
-
-#sideNav {
-  .nav-link {
-    // font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-
-    .icon {
-      font-size: 1rem;
-    }
-
-    span {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-}

@@ -894,6 +894,7 @@ ui:
       transaction: 交易
       group-purchase: 拼单
       promotion: 推广
+      thinking-chitchat: 思考&闲聊
       profile: 用户主页
       setting: 账号设置
       logout: 退出
@@ -901,6 +902,7 @@ ui:
       review: 审查
       bookmark: 收藏夹
       moderation: 管理
+      introduction: 社区介绍
     search:
       placeholder: 搜索
   footer:

@@ -121,18 +121,9 @@ const Index: FC = () => {
           </CustomNavLink> */}
 
           {/* 专区 */}
-          <div className="py-2 px-3 mt-3 small fw-bold">
+          <div className="py-2 px-2 mt-3 small fw-bold">
             {t('header.nav.prefecture')}
           </div>
-          <CustomNavLink to="/tags/it996007" icon="code-slash">
-            {t('header.nav.it')}
-          </CustomNavLink>
-          <CustomNavLink to="/tags/virtual-currency" icon="coin">
-            {t('header.nav.virtual-currency')}
-          </CustomNavLink>
-          <CustomNavLink to="/tags/server" icon="hdd-stack">
-            {t('header.nav.server')}
-          </CustomNavLink>
           <CustomNavLink to="/tags/game" icon="controller">
             {t('header.nav.game')}
           </CustomNavLink>
@@ -144,6 +135,20 @@ const Index: FC = () => {
           </CustomNavLink>
           <CustomNavLink to="/tags/lifestyles" icon="house-heart">
             {t('header.nav.lifestyles')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/thinking-chitchat" icon="lightbulb">
+            {t('header.nav.thinking-chitchat')}
+          </CustomNavLink>
+          {/* 分割线 */}
+          <hr className="my-2 mx-1" />
+          <CustomNavLink to="/tags/it996007" icon="code-slash">
+            {t('header.nav.it')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/virtual-currency" icon="coin">
+            {t('header.nav.virtual-currency')}
+          </CustomNavLink>
+          <CustomNavLink to="/tags/server" icon="hdd-stack">
+            {t('header.nav.server')}
           </CustomNavLink>
           <CustomNavLink to="/tags/banks-money" icon="bank">
             {t('header.nav.banks-money')}
@@ -162,15 +167,18 @@ const Index: FC = () => {
             {t('header.nav.promotion')}
           </CustomNavLink>
 
-          <div className="py-2 px-3  small">
-            <hr />
-            <a href="/tos">{t('nav_menus.tos')}</a> |{' '}
-            <a href="/privacy">{t('nav_menus.privacy')}</a>
+          <div className="py-2 px-1  small flex-warprap">
+            <hr className="mt-0 mb-2" />
+            <a href="/questions/D1C2">{t('header.nav.introduction')}</a>
+            <br />
+            <br />
+            <a href="/tos">{t('nav_menus.tos')}</a> |
+            <a href="/privacy"> {t('nav_menus.privacy')}</a>
           </div>
 
           {can_revision || userInfo?.role_id === 2 ? (
             <>
-              <div className="py-2 px-3 mt-3 small fw-bold">
+              <div className="py-2 px-2 mt-3 small fw-bold">
                 {t('header.nav.moderation')}
               </div>
               {can_revision && (

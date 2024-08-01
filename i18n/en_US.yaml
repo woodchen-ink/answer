@@ -918,6 +918,8 @@ ui:
       transaction: Transaction
       group-purchase: Group purchase
       promotion: Promotion
+      thinking-chitchat: Thinking & Chitchat
+      introduction: Community Introduction
     search:
       placeholder: Search
   footer:

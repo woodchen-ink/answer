@@ -52,6 +52,20 @@
     height: 100%;
     background-color: var(--bs-border-color);
   }
+  .nav-link {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.5rem;
+
+    .icon {
+      font-size: 0.95rem;
+    }
+
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }
 
 @media screen and (max-width: 991.9px) {
@@ -67,3 +81,5 @@
     }
   }
 }
+
+
