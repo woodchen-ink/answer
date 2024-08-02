@@ -899,6 +899,7 @@ ui:
       review: Review
       bookmark: Bookmarks
       moderation: Moderation
+      general: General
       quicklinks: Quick links
       announcement: Announcement
       help: Help

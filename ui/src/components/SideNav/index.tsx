@@ -102,6 +102,10 @@ const Index: FC = () => {
           <CustomNavLink to="/tags/announcement" icon="megaphone-fill">
             {t('header.nav.announcement')}
           </CustomNavLink>
+          {/* 常规话题 */}
+          <CustomNavLink to="/tags/general" icon="sticky-fill">
+            {t('header.nav.general')}
+          </CustomNavLink>
 
           {/* 快捷链接
           <div className="py-2 px-3 mt-3 small fw-bold">

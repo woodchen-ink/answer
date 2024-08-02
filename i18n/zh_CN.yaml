@@ -875,6 +875,7 @@ ui:
       question: 帖子
       tag: 标签
       user: 用户
+      general: 常规
       quicklinks: 快捷链接
       announcement: 公告
       help: 求助
