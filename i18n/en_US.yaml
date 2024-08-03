@@ -920,6 +920,7 @@ ui:
       gossip: Gossip
       banks-money: Banks & Money
       trade-logistics: Trade & Logistics
+      wool: Freebie Hunting
       transaction: Transaction
       group-purchase: Group purchase
       promotion: Promotion
