@@ -25,7 +25,8 @@
                 <p class="text-center mb-0 small text-secondary">
                   {{$cc := (join " " .siteinfo.Year .siteinfo.General.Name) -}}
                   {{- $ft := translator $.language "ui.footer.build_on" "cc" $cc -}}
-                  {{templateHTML}}
+                  {{templateHTML (replaceHTMLTag $ft "<a href=\"https://q58.org/\" target=\"_blank\"> Q58 </a>")}}
+
                 </p>
             </div>
         </footer>
