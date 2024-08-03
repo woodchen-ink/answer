@@ -930,7 +930,7 @@ ui:
       placeholder: Search
   footer:
     build_on: >-
-      Made with love © 2020-{{cc}}.
+      Made with love © 2020-{{cc}}. All rights reserved.
   upload_img:
     name: Change
     loading: loading...

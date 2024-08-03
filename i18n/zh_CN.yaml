@@ -913,7 +913,7 @@ ui:
       placeholder: 搜索
   footer:
     build_on: 
-      用爱制造 © 2020-{{cc}}.
+      用爱制造 © 2020-{{cc}}. All rights reserved.
   upload_img:
     name: 更改
     loading: 加载中...
