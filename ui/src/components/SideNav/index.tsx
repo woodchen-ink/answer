@@ -149,9 +149,6 @@ const Index: FC = () => {
           <CustomNavLink to="/tags/gossip" icon="chat-quote">
             {t('header.nav.gossip')}
           </CustomNavLink>
-          <CustomNavLink to="/tags/chitchat" icon="lightbulb">
-            {t('header.nav.chitchat')}
-          </CustomNavLink>
           {/* 分割线 */}
           <hr className="my-2 mx-1" />
           <CustomNavLink to="/tags/it996007" icon="code-slash">
