@@ -106,6 +106,10 @@ const Index: FC = () => {
           <CustomNavLink to="/tags/general" icon="sticky-fill">
             {t('header.nav.general')}
           </CustomNavLink>
+          {/* 公益 */}
+          <CustomNavLink to="/tags/public-good" icon="hand-thumbs-up-fill">
+            {t('header.nav.public-good')}
+          </CustomNavLink>
 
           {/* 快捷链接
           <div className="py-2 px-3 mt-3 small fw-bold">
