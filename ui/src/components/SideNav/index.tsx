@@ -111,62 +111,61 @@ const Index: FC = () => {
             {t('header.nav.public-good')}
           </CustomNavLink>
 
-          {/* 快捷链接
-          <div className="py-2 px-3 mt-3 small fw-bold">
-            {t('header.nav.quicklinks')}
-          </div>
-          <CustomNavLink to="/tags/help" icon="life-preserver">
-            {t('header.nav.help')}
-          </CustomNavLink>
-          <CustomNavLink to="/tags/information-sharing" icon="share-fill">
-            {t('header.nav.information-sharing')}
-          </CustomNavLink>
-          <CustomNavLink to="/tags/resource-sharing" icon="folder-symlink-fill">
-            {t('header.nav.resource-sharing')}
-          </CustomNavLink>
-          <CustomNavLink to="/tags/just-talk" icon="chat-heart-fill">
-            {t('header.nav.just-talk')}
-          </CustomNavLink> */}
-
           {/* 专区 */}
           <div className="py-2 px-2 mt-3 small fw-bold">
             {t('header.nav.prefecture')}
           </div>
+          {/* 游戏 */}
           <CustomNavLink to="/tags/game" icon="controller">
             {t('header.nav.game')}
           </CustomNavLink>
+          {/* 音乐 */}
           <CustomNavLink to="/tags/music" icon="music-note">
             {t('header.nav.music')}
           </CustomNavLink>
+          {/* 电影 */}
           <CustomNavLink to="/tags/video" icon="film">
             {t('header.nav.video')}
           </CustomNavLink>
+          {/* 阅读 */}
           <CustomNavLink to="/tags/read" icon="book">
             {t('header.nav.read')}
           </CustomNavLink>
+          {/* 运动 */}
           <CustomNavLink to="/tags/sports" icon="emoji-sunglasses">
             {t('header.nav.sports')}
           </CustomNavLink>
+          {/* 旅游 */}
+          <CustomNavLink to="/tags/travel" icon="globe-asia-australia">
+            {t('header.nav.travel')}
+          </CustomNavLink>
+          {/* 生活 */}
           <CustomNavLink to="/tags/life" icon="house-heart">
             {t('header.nav.life')}
           </CustomNavLink>
+          {/* 吃瓜 */}
           <CustomNavLink to="/tags/gossip" icon="chat-quote">
             {t('header.nav.gossip')}
           </CustomNavLink>
           {/* 分割线 */}
           <hr className="my-2 mx-1" />
+          {/* IT */}
           <CustomNavLink to="/tags/it996007" icon="code-slash">
             {t('header.nav.it')}
           </CustomNavLink>
+          {/* 虚拟币 */}
           <CustomNavLink to="/tags/virtual-currency" icon="coin">
             {t('header.nav.virtual-currency')}
           </CustomNavLink>
+          {/* 服务器 */}
           <CustomNavLink to="/tags/server" icon="hdd-stack">
             {t('header.nav.server')}
           </CustomNavLink>
+          {/* 银行和货币 */}
           <CustomNavLink to="/tags/banks-money" icon="bank">
             {t('header.nav.banks-money')}
           </CustomNavLink>
+          {/* 贸易与物流 */}
           <CustomNavLink to="/tags/trade-logistics" icon="buildings">
             {t('header.nav.trade-logistics')}
           </CustomNavLink>
