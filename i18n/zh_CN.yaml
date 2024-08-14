@@ -415,7 +415,7 @@ backend:
     deleted_title:
       other: 删除的帖子
     questions_title:
-      other: Questions
+      other: 帖子
   tag:
     tags_title:
       other: Tags
@@ -428,13 +428,13 @@ backend:
       answer_the_question:
         other: 回帖了帖子
       update_answer:
-        other: 更新了答案
+        other: 更新了回帖
       accept_answer:
-        other: 采纳了答案
+        other: 采纳了回帖
       comment_question:
         other: 评论了帖子
       comment_answer:
-        other: 评论了答案
+        other: 评论了回帖
       reply_to_you:
         other: 回复了你
       mention_you:
@@ -452,7 +452,7 @@ backend:
       down_voted_question:
         other: 点踩帖子
       up_voted_answer:
-        other: 点赞答案
+        other: 点赞回帖
       down_voted_answer:
         other: 点踩回帖
       up_voted_comment:
@@ -472,7 +472,7 @@ backend:
         other: "<a href='{{.AnswerUrl}}'>{{.QuestionTitle}}</a><br><br>\n\n{{.DisplayName}}：<br>\n<blockquote>{{.AnswerSummary}}</blockquote><br>\n<a href='{{.AnswerUrl}}'>在 {{.SiteName}} 上查看</a><br><br>\n\n--<br>\n<small><a href='{{.UnsubscribeUrl}}'>取消订阅</a></small>"
     invited_you_to_answer:
       title:
-        other: "[{{.SiteName}}] {{.DisplayName}} 邀请您回帖帖子"
+        other: "[{{.SiteName}}] {{.DisplayName}} 邀请您回帖"
       body:
         other: "<a href='{{.InviteUrl}}'>{{.QuestionTitle}}</a><br><br>\n\n{{.DisplayName}}：<br>\n<blockquote>我想你可能知道答案。</blockquote><br>\n<a href='{{.InviteUrl}}'>在 {{.SiteName}} 上查看</a><br><br>\n\n--<br>\n<small><a href='{{.UnsubscribeUrl}}'>取消订阅</a></small>"
     new_comment:
@@ -542,7 +542,7 @@ ui:
     tag_wiki: 标签维基
     create_tag: 创建标签
     edit_tag: 编辑标签
-    ask_a_question: 提帖子
+    ask_a_question: 发帖
     edit_question: 编辑帖子
     edit_answer: 编辑回帖
     search: 搜索
@@ -580,7 +580,7 @@ ui:
       invites: 邀请
       votes: 投票
   suspended:
-    title: 你的账号账号已被封禁
+    title: 你的账号已被封禁
     until_time: "你的账号被封禁直到 {{ time }}。"
     forever: 你的账号已被永久封禁。
     end: 你违反了我们的社区准则。
@@ -792,7 +792,7 @@ ui:
     btn_cancel: 取消
     show_more: "{{count}} 条剩余评论"
     tip_question: >-
-      使用评论发帖更多信息或者提出改进意见。避免在评论里回帖帖子。
+      使用评论发布更多信息或者提出改进意见。避免在评论里回帖。
     tip_answer: >-
       使用评论对回帖者进行回复，或者通知回帖者你已更新了帖子的内容。如果要补充或者完善帖子的内容，请在原帖子中更改。
     tip_vote: 它给帖子添加了一些有用的内容
@@ -828,7 +828,7 @@ ui:
     more: 更多
     add_question: 发帖
   ask:
-    title: 新增帖子
+    title: 发帖
     edit_title: 编辑帖子
     default_reason: 编辑帖子
     default_first_reason: 新增帖子
@@ -859,7 +859,7 @@ ui:
           label: 编辑备注
           placeholder: >-
             简单描述更改原因（更正拼写、修复语法、改进格式）
-    btn_post_question: 提交帖子
+    btn_post_question: 发帖
     btn_save_edits: 保存更改
     answer_question: 回帖自己的帖子
     post_question&answer: 提交帖子和回帖
@@ -884,7 +884,9 @@ ui:
       just-talk: 随便聊聊
       public-good: 公益
       prefecture: 专区
-      it: IT
+      interest: 兴趣
+      function: 功能
+      project: 项目
       virtual-currency: 虚拟币
       server: 服务器
       game: 游戏
@@ -1138,7 +1140,7 @@ ui:
     write_answer:
       title: 你的回帖
       edit_answer: 编辑我的回帖
-      btn_name: 提交你的回帖
+      btn_name: 回帖
       add_another_answer: 添加另一个回帖
       confirm_title: 继续回帖
       continue: 继续

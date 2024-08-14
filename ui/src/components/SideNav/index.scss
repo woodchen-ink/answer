@@ -27,23 +27,29 @@
     overflow-y: auto;
     margin-bottom: 8px;
   }
+
   .nav {
     max-width: calc(100% - 24px);
   }
+
   .nav-link {
     color: var(--an-side-nav-link);
   }
+
   .nav-link:focus-visible {
     box-shadow: none;
   }
+
   .nav-link:hover {
     color: var(--an-side-nav-link-hover-color);
     background-color: var(--bs-gray-100);
   }
+
   .nav-link.active {
     color: var(--an-side-nav-link-hover-color);
     background-color: var(--bs-gray-200);
   }
+
   .side-nav-right-line {
     position: absolute;
     top: 0;
@@ -52,20 +58,37 @@
     height: 100%;
     background-color: var(--bs-border-color);
   }
+
   .nav-link {
     font-size: 0.9rem;
     padding: 0.5rem 0.5rem;
 
     .icon {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
     span {
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      overflow: hidden; // 超出部分隐藏
+      text-overflow: ellipsis; // 超出部分显示省略号
     }
   }
+
+  // 定义透明半灰色背景
+  .custom-nav-link {
+    background-color: rgba(128, 128, 128, 0); // 透明灰色背景
+    transition: background-color 0.3s ease;
+  }
+
+  .transition-transform {
+    transition: transform 0.3s ease;
+  }
+  
+  .rotate-180 {
+    transform: rotate(180deg);
+  }
+  
+
 }
 
 @media screen and (max-width: 991.9px) {
@@ -73,13 +96,13 @@
     .nav-wrap {
       max-height: fit-content;
     }
+
     .nav {
       max-width: 100%;
     }
+
     .side-nav-right-line {
       display: none;
     }
   }
 }
-
-

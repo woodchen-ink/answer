@@ -908,7 +908,9 @@ ui:
       just-talk: Just talk
       public-good: Public good
       prefecture: Prefecture
-      it: IT
+      interest: Interest
+      function: Function
+      project: Project
       virtual-currency: Virtual currency
       server: Server
       game: Game
