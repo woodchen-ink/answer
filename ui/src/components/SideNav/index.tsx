@@ -48,7 +48,7 @@ const Index: FC = () => {
   // State to control collapsible sections
   const [interestOpen, setInterestOpen] = useState(true);
   const [functionOpen, setFunctionOpen] = useState(true);
-  const [projectOpen, setProjectOpen] = useState(true);
+  // const [projectOpen, setProjectOpen] = useState(true);
 
   const handleNavClick = (e, path) => {
     e.preventDefault();
