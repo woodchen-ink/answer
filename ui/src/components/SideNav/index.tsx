@@ -164,25 +164,25 @@ const Index: FC = () => {
           <Collapse in={functionOpen}>
             <div>
               {/* IT */}
-              <CustomNavLink to="/tags/it996007" icon="code-slash">
+              {/* <CustomNavLink to="/tags/it996007" icon="code-slash">
                 IT
-              </CustomNavLink>
+              </CustomNavLink> */}
               {/* 虚拟币 */}
-              <CustomNavLink to="/tags/virtual-currency" icon="coin">
+              {/* <CustomNavLink to="/tags/virtual-currency" icon="coin">
                 {t('header.nav.virtual-currency')}
-              </CustomNavLink>
+              </CustomNavLink> */}
               {/* 服务器 */}
-              <CustomNavLink to="/tags/server" icon="hdd-stack">
+              {/* <CustomNavLink to="/tags/server" icon="hdd-stack">
                 {t('header.nav.server')}
-              </CustomNavLink>
+              </CustomNavLink> */}
               {/* 银行和货币 */}
-              <CustomNavLink to="/tags/banks-money" icon="bank">
+              {/* <CustomNavLink to="/tags/banks-money" icon="bank">
                 {t('header.nav.banks-money')}
-              </CustomNavLink>
+              </CustomNavLink> */}
               {/* 贸易与物流 */}
-              <CustomNavLink to="/tags/trade-logistics" icon="buildings">
+              {/* <CustomNavLink to="/tags/trade-logistics" icon="buildings">
                 {t('header.nav.trade-logistics')}
-              </CustomNavLink>
+              </CustomNavLink> */}
               {/* 羊毛,交易,拼单和推广 */}
               <CustomNavLink to="/tags/wool" icon="scissors">
                 {t('header.nav.wool')}
@@ -200,7 +200,7 @@ const Index: FC = () => {
           </Collapse>
 
           {/* 项目专区 */}
-          <div
+          {/* <div
             className="py-2 px-2 mt-3 small fw-bold d-flex justify-content-between align-items-center"
             onClick={() => setProjectOpen(!projectOpen)}
             style={{ cursor: 'pointer' }}>
@@ -214,10 +214,9 @@ const Index: FC = () => {
           </div>
           <Collapse in={projectOpen}>
             <div>
-              {/* One Hub */}
               <CustomNavLink to="/tags/one-hub">One Hub</CustomNavLink>
             </div>
-          </Collapse>
+          </Collapse> */}
 
           <div className="mt-2 py-2 px-1  small flex-warprap">
             <hr className="mt-0 mb-2" />
